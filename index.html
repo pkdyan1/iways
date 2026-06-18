@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="ms" class="h-full">
+<html lang="ms" class="antialiased">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>iWAYS - Inisiatif Warga Aktif Yan Sihat</title>
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -44,551 +44,561 @@
     </script>
     <style>
         /* Custom scrollbar to keep it sleek */
-        .custom-scrollbar::-webkit-scrollbar {
-            width: 5px;
-            height: 5px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-track {
-            background: transparent;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-            background: rgba(156, 163, 175, 0.3);
-            border-radius: 10px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-            background: rgba(156, 163, 175, 0.5);
-        }
+        .custom-scrollbar::-webkit-scrollbar { width: 5px; height: 5px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(156, 163, 175, 0.3); border-radius: 10px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: rgba(156, 163, 175, 0.5); }
         
         /* Smooth transitions */
-        .transition-all-300 {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
+        .transition-all-300 { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        
         /* Glassmorphism utility */
         .glass-card {
-            background: rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.5);
         }
         .dark .glass-card {
             background: rgba(30, 41, 59, 0.7);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
         }
-        /* Pulse glowing effects */
-        @keyframes glow {
-            0%, 100% { box-shadow: 0 0 5px rgba(30, 58, 138, 0.2); }
-            50% { box-shadow: 0 0 15px rgba(30, 58, 138, 0.4); }
+
+        /* --- VISUAL ENHANCEMENTS & ANIMATIONS --- */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-        .glow-blue {
-            animation: glow 3s infinite;
+        .animate-fade-in-up {
+            animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            opacity: 0;
+        }
+        @keyframes animatedGradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .bg-animated-gradient {
+            background-size: 200% 200%;
+            animation: animatedGradient 5s ease infinite;
+        }
+        @keyframes floatEffect {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+        .animate-floating {
+            animation: floatEffect 4s ease-in-out infinite;
         }
         
-        /* Hide scrollbar wrapper */
-        .hide-scrollbar::-webkit-scrollbar {
-            display: none;
+        /* Typography Gradients */
+        .text-gradient-blue {
+            background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
-        .hide-scrollbar {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
+        .dark .text-gradient-blue {
+            background: linear-gradient(135deg, #60a5fa, #93c5fd);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
-        /* Fix height to fit inside Google Sites embeds nicely without outer scrollbars */
-        .embed-container {
-            height: 100%;
-            max-height: 720px;
-            width: 100%;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-        }
+
+        /* Delays for cascading entrance */
+        .delay-100 { animation-delay: 100ms; }
+        .delay-200 { animation-delay: 200ms; }
+        .delay-300 { animation-delay: 300ms; }
+        .delay-400 { animation-delay: 400ms; }
+
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
-<body class="bg-slate-100 dark:bg-slate-950 text-slate-800 dark:text-slate-200 font-sans h-full overflow-hidden flex items-center justify-center p-0 sm:p-2">
+<body class="bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-200 font-sans h-[100dvh] w-full overflow-hidden bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] dark:bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] bg-fixed">
+    
     <!-- MAIN APP WRAPPER -->
-    <div id="app" class="embed-container bg-white dark:bg-slate-900 sm:rounded-3xl sm:shadow-2xl sm:border sm:border-slate-200/80 sm:dark:border-slate-800/80 w-full max-w-lg md:max-w-2xl lg:max-w-4xl relative overflow-hidden transition-all-300">
+    <div id="app" class="w-full h-full bg-white/95 dark:bg-slate-900/95 backdrop-blur-3xl flex flex-col relative overflow-hidden transition-all-300">
         
         <!-- HEADER WIDGET -->
-        <header class="bg-gradient-to-r from-iways-blue to-blue-900 text-white px-4 py-3 sm:px-6 sm:py-4 flex items-center justify-between shadow-md shrink-0 relative overflow-hidden z-10">
+        <header class="bg-gradient-to-r from-iways-blue to-blue-900 text-white px-4 py-3 sm:px-6 sm:py-4 flex items-center justify-between shadow-lg shrink-0 relative overflow-hidden z-20 border-b border-blue-800/50">
             <!-- Background lights decoration -->
-            <div class="absolute -right-10 -top-10 w-24 h-24 bg-iways-green rounded-full opacity-30 filter blur-xl"></div>
-            <div class="absolute -left-10 -bottom-10 w-24 h-24 bg-iways-gold rounded-full opacity-25 filter blur-xl"></div>
-            <div class="flex items-center space-x-3 relative z-10">
+            <div class="absolute -right-10 -top-10 w-32 h-32 bg-iways-green rounded-full opacity-40 filter blur-2xl animate-pulse"></div>
+            <div class="absolute -left-10 -bottom-10 w-32 h-32 bg-iways-gold rounded-full opacity-30 filter blur-2xl animate-pulse delay-700"></div>
+            
+            <div class="flex items-center space-x-3 sm:space-x-4 relative z-10">
                 <!-- Icon Logo iWAYS -->
-                <div class="w-10 h-10 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center shadow-inner group">
-                    <svg class="w-6 h-6 text-iways-gold-light animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                    </svg>
+                <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center shadow-inner overflow-hidden group transition-all duration-300 hover:shadow-white/20 hover:bg-white/20">
+                    <img src="https://i.postimg.cc/5226TFrF/logo-iways-removebg-preview.png" alt="Logo iWAYS" class="w-full h-full object-contain p-1 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500">
                 </div>
                 <div>
                     <h1 class="text-base sm:text-lg font-extrabold tracking-tight flex items-center">
                         iWAYS
-                        <span class="ml-2 px-2 py-0.5 text-[10px] font-bold bg-iways-green text-white rounded-full uppercase tracking-wider">Yan</span>
+                        <span class="ml-2 px-2.5 py-0.5 text-[9px] font-black bg-gradient-to-r from-iways-green to-green-400 text-white rounded-full uppercase tracking-widest shadow-md">Yan</span>
                     </h1>
-                    <p class="text-[10px] sm:text-xs text-blue-200 font-medium">Inisiatif Warga Aktif Yan Sihat</p>
+                    <p class="text-[10px] sm:text-xs text-blue-200 font-medium tracking-wide">Inisiatif Warga Aktif Yan Sihat</p>
                 </div>
             </div>
             
             <!-- CONTROLS: Mode Gelap/Cerah & Info -->
-            <div class="flex items-center space-x-2 relative z-10">
-                <button onclick="toggleDarkMode()" class="p-2 rounded-xl bg-white/10 hover:bg-white/20 active:scale-95 transition-all duration-200 border border-white/10 flex items-center justify-center" aria-label="Toggle Dark Mode">
-                    <!-- Sun Icon (Shown in Dark Mode) -->
-                    <svg id="sun-icon" class="w-4 h-4 text-iways-gold hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="flex items-center space-x-3 relative z-10">
+                <div class="hidden sm:flex items-center space-x-1.5 px-3 py-1.5 bg-white/10 backdrop-blur-md rounded-xl border border-white/10 shadow-inner">
+                    <div class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></div>
+                    <span class="text-[11px] font-bold tracking-wider">iWAYS 2026</span>
+                </div>
+                <button onclick="toggleDarkMode()" class="p-2.5 rounded-xl bg-white/10 hover:bg-white/25 active:scale-90 transition-all duration-300 border border-white/10 flex items-center justify-center shadow-lg hover:shadow-xl hover:-translate-y-0.5" aria-label="Toggle Dark Mode">
+                    <!-- Sun Icon -->
+                    <svg id="sun-icon" class="w-5 h-5 text-yellow-300 hidden transition-transform hover:rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.364l-.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z"></path>
                     </svg>
-                    <!-- Moon Icon (Shown in Light Mode) -->
-                    <svg id="moon-icon" class="w-4 h-4 text-blue-100" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <!-- Moon Icon -->
+                    <svg id="moon-icon" class="w-5 h-5 text-blue-100 transition-transform hover:-rotate-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
                     </svg>
                 </button>
-                <div class="hidden sm:block text-xs font-semibold px-3 py-1 bg-white/10 rounded-xl border border-white/10">
-                    Kedah 2026
-                </div>
             </div>
         </header>
-        <!-- MAIN TABS CONTAINER (Viewport Scrollable inside) -->
-        <main class="flex-1 overflow-y-auto custom-scrollbar bg-slate-50 dark:bg-slate-900/40 relative">
+
+        <!-- MAIN TABS CONTAINER -->
+        <main class="flex-1 overflow-y-auto custom-scrollbar relative z-10">
             
             <!-- ========================================== -->
             <!-- TAB 1: DASHBOARD UTAMA                     -->
             <!-- ========================================== -->
-            <section id="tab-utama" class="tab-panel p-4 sm:p-6 space-y-6 block">
-                <!-- Welcome Banner -->
-                <div class="relative bg-gradient-to-br from-iways-blue via-blue-900 to-slate-900 text-white rounded-2xl p-5 shadow-lg overflow-hidden flex flex-col justify-between min-h-[140px] glow-blue">
-                    <div class="absolute -right-6 -bottom-6 w-32 h-32 bg-iways-green/20 rounded-full opacity-30 filter blur-xl"></div>
-                    <div class="relative z-10 space-y-2">
-                        <span class="text-[10px] font-bold tracking-widest text-iways-gold uppercase bg-iways-gold/10 px-2.5 py-1 rounded-full border border-iways-gold/20">Hebahan Khas</span>
-                        <h2 class="text-xl sm:text-2xl font-extrabold leading-tight">Papan Pemuka Komuniti iWAYS</h2>
-                        <p class="text-xs sm:text-sm text-slate-300 max-w-md">Pantau, analisis kesihatan fizikal, dan dapatkan pautan aktiviti cergas warga Yan Kedah dengan mudah.</p>
+            <section id="tab-utama" class="tab-panel p-4 sm:p-6 md:p-8 space-y-6 block max-w-6xl mx-auto w-full">
+                
+                <!-- Welcome Banner (Animated) -->
+                <div class="animate-fade-in-up relative bg-gradient-to-r from-iways-blue via-indigo-500 to-blue-700 bg-animated-gradient text-white rounded-[2rem] p-6 sm:p-8 shadow-xl shadow-blue-900/20 overflow-hidden flex flex-col justify-between min-h-[160px] border border-white/20 group">
+                    <div class="absolute -right-10 -bottom-10 w-48 h-48 bg-white/10 rounded-full blur-2xl group-hover:bg-white/20 transition-colors duration-700"></div>
+                    <div class="absolute top-4 right-6 text-5xl sm:text-7xl opacity-20 animate-floating">🏃‍♂️</div>
+                    <div class="relative z-10 space-y-3">
+                        <span class="text-[10px] font-extrabold tracking-widest text-iways-gold uppercase bg-black/20 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/10 inline-block shadow-sm">Hebahan Khas</span>
+                        <h2 class="text-2xl sm:text-3xl lg:text-4xl font-black leading-tight tracking-tight text-white drop-shadow-md">Papan Pemuka Komuniti</h2>
+                        <p class="text-xs sm:text-sm text-blue-100 max-w-md font-medium leading-relaxed">Pantau prestasi fizikal, analisis kesihatan, dan kekal aktif bersama komuniti cergas Yan Kedah.</p>
                     </div>
                 </div>
+
                 <!-- STATS COUNTERS -->
-                <div class="grid grid-cols-3 gap-3">
-                    <!-- Stat 1: Warga Terlibat -->
-                    <div class="glass-card rounded-2xl p-3 text-center flex flex-col justify-between shadow-sm hover:shadow-md transition-all duration-300 border border-slate-200/50 dark:border-slate-800/50 group hover:-translate-y-0.5">
-                        <div class="mx-auto p-2 rounded-xl bg-blue-50 dark:bg-blue-950/50 text-iways-blue dark:text-blue-400 group-hover:bg-iways-blue group-hover:text-white dark:group-hover:bg-blue-600 transition-colors duration-300 mb-2">
-                            <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                            </svg>
+                <div class="grid grid-cols-3 gap-3 sm:gap-6 md:gap-8">
+                    <!-- Stat 1 -->
+                    <div class="animate-fade-in-up delay-100 glass-card rounded-2xl p-3 sm:p-5 text-center flex flex-col justify-between shadow-lg shadow-slate-200/50 hover:shadow-xl transition-all duration-300 border border-slate-200/60 dark:border-slate-800/60 dark:shadow-none group hover:-translate-y-1.5 bg-gradient-to-b from-white to-slate-50 dark:from-slate-800 dark:to-slate-900 overflow-hidden relative">
+                        <div class="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-blue-400 to-iways-blue opacity-80"></div>
+                        <div class="mx-auto p-3 rounded-2xl bg-blue-50/80 dark:bg-blue-950/50 text-iways-blue dark:text-blue-400 group-hover:scale-110 group-hover:bg-iways-blue group-hover:text-white dark:group-hover:bg-blue-600 transition-all duration-500 mb-2 shadow-sm group-hover:shadow-blue-500/30">
+                            <svg class="w-6 h-6 sm:w-8 sm:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
                         </div>
                         <div>
-                            <p class="text-[10px] sm:text-xs font-semibold text-slate-500 dark:text-slate-400">Warga Terlibat</p>
-                            <p id="stat-warga" class="text-lg sm:text-2xl font-extrabold text-slate-900 dark:text-white" data-target="1204">0</p>
+                            <p class="text-[9px] sm:text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-1">Warga Terlibat</p>
+                            <p id="stat-warga" class="text-lg sm:text-3xl font-black text-slate-800 dark:text-white" data-target="1204">0</p>
                         </div>
                     </div>
-                    <!-- Stat 2: Aktiviti Selesai -->
-                    <div class="glass-card rounded-2xl p-3 text-center flex flex-col justify-between shadow-sm hover:shadow-md transition-all duration-300 border border-slate-200/50 dark:border-slate-800/50 group hover:-translate-y-0.5">
-                        <div class="mx-auto p-2 rounded-xl bg-green-50 dark:bg-green-950/50 text-iways-green dark:text-green-400 group-hover:bg-iways-green group-hover:text-white dark:group-hover:bg-green-600 transition-colors duration-300 mb-2">
-                            <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                            </svg>
+                    <!-- Stat 2 -->
+                    <div class="animate-fade-in-up delay-200 glass-card rounded-2xl p-3 sm:p-5 text-center flex flex-col justify-between shadow-lg shadow-slate-200/50 hover:shadow-xl transition-all duration-300 border border-slate-200/60 dark:border-slate-800/60 dark:shadow-none group hover:-translate-y-1.5 bg-gradient-to-b from-white to-slate-50 dark:from-slate-800 dark:to-slate-900 overflow-hidden relative">
+                        <div class="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-green-400 to-iways-green opacity-80"></div>
+                        <div class="mx-auto p-3 rounded-2xl bg-green-50/80 dark:bg-green-950/50 text-iways-green dark:text-green-400 group-hover:scale-110 group-hover:bg-iways-green group-hover:text-white dark:group-hover:bg-green-600 transition-all duration-500 mb-2 shadow-sm group-hover:shadow-green-500/30">
+                            <svg class="w-6 h-6 sm:w-8 sm:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                         </div>
                         <div>
-                            <p class="text-[10px] sm:text-xs font-semibold text-slate-500 dark:text-slate-400">Aktiviti Selesai</p>
-                            <p id="stat-aktiviti" class="text-lg sm:text-2xl font-extrabold text-slate-900 dark:text-white" data-target="45">0</p>
+                            <p class="text-[9px] sm:text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-1">Aktiviti Selesai</p>
+                            <p id="stat-aktiviti" class="text-lg sm:text-3xl font-black text-slate-800 dark:text-white" data-target="45">0</p>
                         </div>
                     </div>
-                    <!-- Stat 3: Jam Aktif -->
-                    <div class="glass-card rounded-2xl p-3 text-center flex flex-col justify-between shadow-sm hover:shadow-md transition-all duration-300 border border-slate-200/50 dark:border-slate-800/50 group hover:-translate-y-0.5">
-                        <div class="mx-auto p-2 rounded-xl bg-yellow-50 dark:bg-yellow-950/50 text-yellow-600 dark:text-yellow-400 group-hover:bg-iways-gold group-hover:text-white dark:group-hover:bg-yellow-500 transition-colors duration-300 mb-2">
-                            <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                            </svg>
+                    <!-- Stat 3 -->
+                    <div class="animate-fade-in-up delay-300 glass-card rounded-2xl p-3 sm:p-5 text-center flex flex-col justify-between shadow-lg shadow-slate-200/50 hover:shadow-xl transition-all duration-300 border border-slate-200/60 dark:border-slate-800/60 dark:shadow-none group hover:-translate-y-1.5 bg-gradient-to-b from-white to-slate-50 dark:from-slate-800 dark:to-slate-900 overflow-hidden relative">
+                        <div class="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-yellow-300 to-iways-gold opacity-80"></div>
+                        <div class="mx-auto p-3 rounded-2xl bg-yellow-50/80 dark:bg-yellow-950/50 text-yellow-600 dark:text-yellow-400 group-hover:scale-110 group-hover:bg-iways-gold group-hover:text-white dark:group-hover:bg-yellow-500 transition-all duration-500 mb-2 shadow-sm group-hover:shadow-yellow-500/30">
+                            <svg class="w-6 h-6 sm:w-8 sm:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                         </div>
                         <div>
-                            <p class="text-[10px] sm:text-xs font-semibold text-slate-500 dark:text-slate-400">Jam Aktif</p>
-                            <p id="stat-jam" class="text-lg sm:text-2xl font-extrabold text-slate-900 dark:text-white" data-target="8530">0</p>
+                            <p class="text-[9px] sm:text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-1">Jam Aktif</p>
+                            <p id="stat-jam" class="text-lg sm:text-3xl font-black text-slate-800 dark:text-white" data-target="8530">0</p>
                         </div>
                     </div>
                 </div>
-                <!-- VIDEO PRESENTATION (MEDIA WIDGET) -->
-                <div class="glass-card rounded-2xl p-4 sm:p-5 shadow-sm border border-slate-200/50 dark:border-slate-800/50 space-y-4">
-                    <div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-800/60 pb-3">
-                        <div class="flex items-center space-x-2">
-                            <span class="text-lg">🎥</span>
-                            <h3 class="text-sm sm:text-base font-bold text-slate-800 dark:text-slate-100">Video Promosi & Hebahan</h3>
+
+                <!-- MEDIA WIDGET -->
+                <div class="animate-fade-in-up delay-400 glass-card rounded-[2rem] p-5 sm:p-6 shadow-lg border border-slate-200/50 dark:border-slate-800/50 space-y-4 hover:shadow-xl transition-shadow duration-300">
+                    <div class="flex items-center justify-between pb-2 border-b border-slate-100 dark:border-slate-800/60">
+                        <div class="flex items-center space-x-3">
+                            <div class="p-2 bg-rose-100 dark:bg-rose-950/50 rounded-lg text-rose-500 animate-pulse">🎥</div>
+                            <h3 class="text-base sm:text-lg font-bold text-gradient-blue">Video Promosi & Hebahan</h3>
                         </div>
-                        <span class="px-2 py-0.5 text-[10px] bg-red-100 text-red-700 dark:bg-red-950/40 dark:text-red-400 font-bold rounded-full animate-pulse uppercase">Rasmi</span>
                     </div>
-                    <!-- Modern Interactive Mock Video Player Shell -->
-                    <div class="relative w-full rounded-2xl overflow-hidden aspect-video bg-slate-950 flex items-center justify-center border-2 border-slate-200/60 dark:border-slate-800 group shadow-inner">
-                        <!-- Background image cover with low opacity -->
-                        <div class="absolute inset-0 bg-cover bg-center opacity-40 transition-transform duration-700 group-hover:scale-105" style="background-image: url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=800&q=80');"></div>
+                    
+                    <div class="relative w-full rounded-2xl overflow-hidden aspect-video bg-slate-950 flex items-center justify-center border border-slate-200/60 dark:border-slate-800 group shadow-inner">
+                        <div class="absolute inset-0 bg-cover bg-center opacity-50 transition-transform duration-1000 group-hover:scale-110" style="background-image: url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=800&q=80');"></div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent"></div>
                         
-                        <!-- Glow overlay -->
-                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/50 to-transparent"></div>
-                        <!-- Video Player Interface -->
                         <div id="video-placeholder" class="relative z-10 flex flex-col items-center text-center px-4">
-                            <!-- Play Button -->
-                            <button onclick="playMockVideo()" class="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-white/20 backdrop-blur-md border border-white/40 flex items-center justify-center text-white shadow-xl hover:scale-110 active:scale-95 hover:bg-iways-gold hover:border-transparent transition-all duration-300 cursor-pointer group/play">
-                                <svg class="w-6 h-6 text-white group-hover/play:text-slate-950 group-hover/play:scale-110 transition-transform duration-300 ml-1" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M8 5v14l11-7z"></path>
-                                </svg>
+                            <button onclick="playMockVideo()" class="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-white/20 backdrop-blur-md border border-white/40 flex items-center justify-center text-white shadow-2xl hover:scale-110 active:scale-95 hover:bg-iways-gold hover:border-transparent transition-all duration-300 cursor-pointer group/play">
+                                <svg class="w-8 h-8 text-white group-hover/play:text-slate-950 group-hover/play:scale-110 transition-transform duration-300 ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"></path></svg>
                             </button>
-                            <h4 class="text-sm sm:text-base font-extrabold text-white mt-3 text-shadow-md">Video Korporat iWAYS Yan</h4>
-                            <p class="text-[10px] sm:text-xs text-slate-300 mt-1">Sila klik untuk memainkan video demonstrasi senaman.</p>
+                            <h4 class="text-sm sm:text-lg font-black text-white mt-4 tracking-wide">Tonton Panduan Senaman iWAYS</h4>
                         </div>
-                        <!-- Mock Video Play Overlay Animation -->
+                        
+                        <!-- Mock Video Overlay -->
                         <div id="video-player-frame" class="absolute inset-0 z-20 bg-slate-950 hidden flex-col items-center justify-center text-white">
-                            <!-- In Google Sites embed, a Youtube iframe or standard video can play here. We create an elegant mock screen -->
-                            <div class="w-full h-full flex flex-col items-center justify-center relative p-4">
-                                <button onclick="stopMockVideo()" class="absolute top-3 right-3 p-1.5 rounded-full bg-white/10 hover:bg-white/20 text-white z-30 transition-colors" aria-label="Close video">
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path>
-                                    </svg>
-                                </button>
-                                
-                                <!-- Pulse wave design representing a playing video -->
-                                <div class="flex items-center justify-center space-x-2 mb-3">
-                                    <div class="w-1.5 h-6 bg-iways-green rounded-full animate-bounce" style="animation-delay: 0.1s"></div>
-                                    <div class="w-1.5 h-10 bg-iways-gold rounded-full animate-bounce" style="animation-delay: 0.3s"></div>
-                                    <div class="w-1.5 h-14 bg-iways-blue-light rounded-full animate-bounce" style="animation-delay: 0.5s"></div>
-                                    <div class="w-1.5 h-10 bg-iways-gold rounded-full animate-bounce" style="animation-delay: 0.7s"></div>
-                                    <div class="w-1.5 h-6 bg-iways-green rounded-full animate-bounce" style="animation-delay: 0.9s"></div>
-                                </div>
-                                <span class="text-xs sm:text-sm font-bold text-iways-gold animate-pulse">Memainkan Video Latihan Kecergasan...</span>
-                                <p class="text-[10px] text-slate-400 mt-2 max-w-xs text-center">Dalam Google Sites, anda boleh menukarkan kod ini kepada pautan *YouTube Embed* dengan mudah.</p>
+                            <button onclick="stopMockVideo()" class="absolute top-4 right-4 p-2 rounded-full bg-white/10 hover:bg-white/30 transition-colors z-30" aria-label="Close video">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg>
+                            </button>
+                            <div class="flex items-center space-x-2 mb-4">
+                                <div class="w-2 h-8 bg-iways-green rounded-full animate-bounce" style="animation-delay: 0.1s"></div>
+                                <div class="w-2 h-12 bg-iways-gold rounded-full animate-bounce" style="animation-delay: 0.3s"></div>
+                                <div class="w-2 h-16 bg-blue-400 rounded-full animate-bounce" style="animation-delay: 0.5s"></div>
+                                <div class="w-2 h-12 bg-iways-gold rounded-full animate-bounce" style="animation-delay: 0.7s"></div>
+                                <div class="w-2 h-8 bg-iways-green rounded-full animate-bounce" style="animation-delay: 0.9s"></div>
                             </div>
+                            <span class="text-sm font-bold text-iways-gold animate-pulse tracking-widest">MEMAIN KAN VIDEO...</span>
                         </div>
                     </div>
                 </div>
-                <!-- CTA CARD: Sertai iWAYS -->
-                <div class="relative bg-gradient-to-br from-iways-blue to-blue-800 rounded-2xl p-5 shadow-md text-white overflow-hidden group hover:shadow-lg transition-all duration-300">
-                    <div class="absolute -right-10 -top-10 w-28 h-28 bg-white/5 rounded-full border border-white/10 group-hover:scale-110 transition-transform duration-500"></div>
-                    <div class="relative z-10 space-y-4">
-                        <div class="space-y-1">
-                            <h3 class="text-lg font-bold">Sertai iWAYS 2026</h3>
-                            <p class="text-xs text-blue-100">"Aktif Itu Tekad, Sihat Itu Nikmat". Jadikan gaya hidup aktif sebagai amalan rutin harian anda.</p>
+
+                <!-- CTA CARD -->
+                <div class="animate-fade-in-up delay-400 relative bg-gradient-to-br from-iways-blue to-blue-800 rounded-3xl p-6 sm:p-8 shadow-xl shadow-blue-900/10 text-white overflow-hidden group hover:shadow-2xl transition-all duration-500 hover:-translate-y-1">
+                    <div class="absolute -right-10 -top-10 w-40 h-40 bg-white/10 rounded-full blur-2xl group-hover:bg-iways-gold/20 group-hover:scale-150 transition-all duration-700"></div>
+                    <div class="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-5">
+                        <div class="space-y-2 flex-1">
+                            <span class="px-2.5 py-1 text-[10px] font-black bg-white/20 rounded-md uppercase tracking-widest">Pendaftaran 2026</span>
+                            <h3 class="text-xl sm:text-2xl font-black tracking-tight">Sertai Komuniti Aktif</h3>
+                            <p class="text-xs sm:text-sm text-blue-100 font-medium">"Aktif Itu Tekad, Sihat Itu Nikmat". Jadikan gaya hidup sihat rutin harian anda.</p>
                         </div>
-                        <button onclick="registerAttendance()" class="w-full py-2.5 px-4 rounded-xl bg-iways-gold text-slate-900 font-bold text-xs sm:text-sm hover:bg-yellow-400 active:scale-98 hover:shadow-lg hover:shadow-iways-gold/20 shadow-md transition-all duration-300 flex items-center justify-center space-x-2">
+                        <button onclick="registerAttendance()" class="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-iways-gold text-slate-900 font-bold text-sm hover:bg-yellow-400 active:scale-95 hover:shadow-lg hover:shadow-yellow-400/50 transition-all duration-300 flex items-center justify-center space-x-2 shrink-0">
                             <span>✍️</span>
-                            <span>Daftar Kehadiran Aktiviti</span>
+                            <span>Daftar Sekarang</span>
                         </button>
                     </div>
                 </div>
             </section>
+
             <!-- ========================================== -->
             <!-- TAB 2: JADUAL AKTIVITI                     -->
             <!-- ========================================== -->
-            <section id="tab-aktiviti" class="tab-panel p-4 sm:p-6 space-y-6 hidden">
-                <div class="flex items-center space-x-2 border-b border-slate-100 dark:border-slate-800/80 pb-3">
-                    <span class="text-xl">📅</span>
-                    <h3 class="text-base sm:text-lg font-bold text-slate-800 dark:text-slate-100">Jadual Aktiviti Akan Datang</h3>
+            <section id="tab-aktiviti" class="tab-panel p-4 sm:p-6 md:p-8 space-y-6 hidden max-w-6xl mx-auto w-full">
+                <div class="animate-fade-in-up flex items-center space-x-3 border-b border-slate-200 dark:border-slate-800 pb-4">
+                    <div class="p-2 bg-blue-100 dark:bg-blue-950/50 rounded-lg text-iways-blue dark:text-blue-400">📅</div>
+                    <h3 class="text-xl sm:text-2xl font-black text-gradient-blue tracking-tight">Jadual Aktiviti Mendatang</h3>
                 </div>
-                <!-- Event Schedule List -->
+                
                 <div class="space-y-4">
                     <!-- Event 1 -->
-                    <div class="glass-card rounded-2xl p-4 shadow-sm border border-slate-200/50 dark:border-slate-800/50 flex items-start space-x-4 hover:shadow-md transition-all duration-300">
-                        <div class="bg-blue-100 dark:bg-blue-950 text-iways-blue dark:text-blue-400 rounded-xl p-2.5 text-center min-w-[65px] border border-blue-200/40 dark:border-blue-900/40 flex flex-col justify-center">
-                            <span class="block text-[10px] font-bold uppercase tracking-wider text-blue-500">Julai</span>
-                            <span class="block text-2xl font-extrabold">15</span>
+                    <div class="animate-fade-in-up delay-100 glass-card rounded-[1.5rem] p-4 sm:p-5 shadow-md border-l-4 border-l-iways-blue border-y-slate-200/50 border-r-slate-200/50 dark:border-y-slate-800/50 dark:border-r-slate-800/50 flex items-start space-x-4 sm:space-x-5 hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+                        <div class="bg-blue-50 dark:bg-blue-950/40 text-iways-blue dark:text-blue-400 rounded-2xl p-3 sm:p-4 text-center min-w-[70px] border border-blue-100 dark:border-blue-900/40 shadow-inner">
+                            <span class="block text-[10px] font-black uppercase tracking-widest">Jul</span>
+                            <span class="block text-3xl font-black leading-none mt-1">15</span>
                         </div>
-                        <div class="flex-1 space-y-2">
+                        <div class="flex-1 space-y-3">
                             <div>
-                                <h4 class="text-sm sm:text-base font-bold text-slate-900 dark:text-white">Senamrobik Perdana Komuniti Yan</h4>
-                                <p class="text-[11px] sm:text-xs text-slate-500 dark:text-slate-400 mt-1 flex items-center">
-                                    <svg class="w-3.5 h-3.5 mr-1 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg> 
+                                <h4 class="text-base sm:text-lg font-bold text-slate-900 dark:text-white leading-tight">Senamrobik Perdana Komuniti Yan</h4>
+                                <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1.5 flex items-center font-medium">
+                                    <svg class="w-4 h-4 mr-1.5 text-iways-blue dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg> 
                                     Padang MDY, Yan
                                 </p>
                             </div>
-                            <button onclick="rsvpEvent(this, 'Senamrobik Perdana')" class="py-1.5 px-3 rounded-lg bg-iways-blue text-white text-xs font-bold hover:bg-blue-800 transition-colors shadow-sm active:scale-95">
+                            <button onclick="rsvpEvent(this, 'Senamrobik Perdana')" class="py-2 px-4 rounded-lg bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-xs font-bold hover:bg-iways-blue dark:hover:bg-blue-500 transition-colors shadow-md active:scale-95">
                                 RSVP Kehadiran
                             </button>
                         </div>
                     </div>
+
                     <!-- Event 2 -->
-                    <div class="glass-card rounded-2xl p-4 shadow-sm border border-slate-200/50 dark:border-slate-800/50 flex items-start space-x-4 hover:shadow-md transition-all duration-300">
-                        <div class="bg-green-100 dark:bg-green-950 text-iways-green dark:text-green-400 rounded-xl p-2.5 text-center min-w-[65px] border border-green-200/40 dark:border-green-900/40 flex flex-col justify-center">
-                            <span class="block text-[10px] font-bold uppercase tracking-wider text-green-500">Julai</span>
-                            <span class="block text-2xl font-extrabold">22</span>
+                    <div class="animate-fade-in-up delay-200 glass-card rounded-[1.5rem] p-4 sm:p-5 shadow-md border-l-4 border-l-iways-green border-y-slate-200/50 border-r-slate-200/50 dark:border-y-slate-800/50 dark:border-r-slate-800/50 flex items-start space-x-4 sm:space-x-5 hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+                        <div class="bg-green-50 dark:bg-green-950/40 text-iways-green dark:text-green-400 rounded-2xl p-3 sm:p-4 text-center min-w-[70px] border border-green-100 dark:border-green-900/40 shadow-inner">
+                            <span class="block text-[10px] font-black uppercase tracking-widest">Jul</span>
+                            <span class="block text-3xl font-black leading-none mt-1">22</span>
                         </div>
-                        <div class="flex-1 space-y-2">
+                        <div class="flex-1 space-y-3">
                             <div>
-                                <h4 class="text-sm sm:text-base font-bold text-slate-900 dark:text-white">Klinik Kesihatan Bergerak & Saringan</h4>
-                                <p class="text-[11px] sm:text-xs text-slate-500 dark:text-slate-400 mt-1 flex items-center">
-                                    <svg class="w-3.5 h-3.5 mr-1 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg> 
+                                <h4 class="text-base sm:text-lg font-bold text-slate-900 dark:text-white leading-tight">Klinik Kesihatan Bergerak & Saringan</h4>
+                                <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1.5 flex items-center font-medium">
+                                    <svg class="w-4 h-4 mr-1.5 text-iways-green dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg> 
                                     Dewan Serbaguna Guar Chempedak
                                 </p>
                             </div>
-                            <button onclick="rsvpEvent(this, 'Klinik Kesihatan')" class="py-1.5 px-3 rounded-lg bg-iways-blue text-white text-xs font-bold hover:bg-blue-800 transition-colors shadow-sm active:scale-95">
+                            <button onclick="rsvpEvent(this, 'Klinik Kesihatan')" class="py-2 px-4 rounded-lg bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-xs font-bold hover:bg-iways-blue dark:hover:bg-blue-500 transition-colors shadow-md active:scale-95">
                                 RSVP Kehadiran
                             </button>
                         </div>
                     </div>
+
                     <!-- Event 3 -->
-                    <div class="glass-card rounded-2xl p-4 shadow-sm border border-slate-200/50 dark:border-slate-800/50 flex items-start space-x-4 hover:shadow-md transition-all duration-300">
-                        <div class="bg-yellow-100 dark:bg-yellow-950 text-yellow-600 dark:text-yellow-400 rounded-xl p-2.5 text-center min-w-[65px] border border-yellow-200/40 dark:border-yellow-900/40 flex flex-col justify-center">
-                            <span class="block text-[10px] font-bold uppercase tracking-wider text-yellow-600">Ogos</span>
-                            <span class="block text-2xl font-extrabold">05</span>
+                    <div class="animate-fade-in-up delay-300 glass-card rounded-[1.5rem] p-4 sm:p-5 shadow-md border-l-4 border-l-iways-gold border-y-slate-200/50 border-r-slate-200/50 dark:border-y-slate-800/50 dark:border-r-slate-800/50 flex items-start space-x-4 sm:space-x-5 hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+                        <div class="bg-yellow-50 dark:bg-yellow-950/40 text-yellow-600 dark:text-yellow-400 rounded-2xl p-3 sm:p-4 text-center min-w-[70px] border border-yellow-100 dark:border-yellow-900/40 shadow-inner">
+                            <span class="block text-[10px] font-black uppercase tracking-widest">Ogo</span>
+                            <span class="block text-3xl font-black leading-none mt-1">05</span>
                         </div>
-                        <div class="flex-1 space-y-2">
+                        <div class="flex-1 space-y-3">
                             <div>
-                                <h4 class="text-sm sm:text-base font-bold text-slate-900 dark:text-white">Kayuhan Santai Warisan Yan</h4>
-                                <p class="text-[11px] sm:text-xs text-slate-500 dark:text-slate-400 mt-1 flex items-center">
-                                    <svg class="w-3.5 h-3.5 mr-1 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg> 
+                                <h4 class="text-base sm:text-lg font-bold text-slate-900 dark:text-white leading-tight">Kayuhan Santai Warisan Yan</h4>
+                                <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1.5 flex items-center font-medium">
+                                    <svg class="w-4 h-4 mr-1.5 text-iways-gold dark:text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg> 
                                     Dataran Sungai Limau, Yan
                                 </p>
                             </div>
-                            <button onclick="rsvpEvent(this, 'Kayuhan Santai')" class="py-1.5 px-3 rounded-lg bg-iways-blue text-white text-xs font-bold hover:bg-blue-800 transition-colors shadow-sm active:scale-95">
+                            <button onclick="rsvpEvent(this, 'Kayuhan Santai')" class="py-2 px-4 rounded-lg bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-xs font-bold hover:bg-iways-blue dark:hover:bg-blue-500 transition-colors shadow-md active:scale-95">
                                 RSVP Kehadiran
                             </button>
                         </div>
                     </div>
                 </div>
             </section>
+
             <!-- ========================================== -->
             <!-- TAB 3: KALKULATOR KESIHATAN               -->
             <!-- ========================================== -->
-            <section id="tab-kalkulator" class="tab-panel p-4 sm:p-6 space-y-6 hidden">
-                <div class="flex items-center space-x-2 border-b border-slate-100 dark:border-slate-800/80 pb-3">
-                    <span class="text-xl">📊</span>
-                    <h3 class="text-base sm:text-lg font-bold text-slate-800 dark:text-slate-100">Alat Pengukur Kesihatan</h3>
+            <section id="tab-kalkulator" class="tab-panel p-4 sm:p-6 md:p-8 space-y-6 hidden max-w-6xl mx-auto w-full">
+                <div class="animate-fade-in-up flex items-center space-x-3 border-b border-slate-200 dark:border-slate-800 pb-4">
+                    <div class="p-2 bg-indigo-100 dark:bg-indigo-950/50 rounded-lg text-indigo-500">📊</div>
+                    <h3 class="text-xl sm:text-2xl font-black text-gradient-blue tracking-tight">Kalkulator Kesihatan</h3>
                 </div>
+
                 <!-- Calculator Select Tabs -->
-                <div class="flex bg-slate-200/60 dark:bg-slate-800/60 p-1 rounded-xl">
-                    <button id="btn-calc-bmi" onclick="switchCalculator('bmi')" class="flex-1 py-2 text-xs font-bold rounded-lg text-slate-900 dark:text-white bg-white dark:bg-slate-700 shadow-sm transition-all duration-200">
+                <div class="animate-fade-in-up delay-100 flex bg-slate-200/80 dark:bg-slate-800/80 p-1.5 rounded-2xl shadow-inner">
+                    <button id="btn-calc-bmi" onclick="switchCalculator('bmi')" class="flex-1 py-2.5 text-xs sm:text-sm font-bold rounded-xl text-iways-blue dark:text-white bg-white dark:bg-slate-700 shadow-md transition-all duration-300 transform scale-100">
                         ⚖️ BMI
                     </button>
-                    <button id="btn-calc-pinggang" onclick="switchCalculator('pinggang')" class="flex-1 py-2 text-xs font-bold rounded-lg text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-all duration-200">
+                    <button id="btn-calc-pinggang" onclick="switchCalculator('pinggang')" class="flex-1 py-2.5 text-xs sm:text-sm font-bold rounded-xl text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-all duration-300">
                         📏 Pinggang
                     </button>
-                    <button id="btn-calc-badan" onclick="switchCalculator('badan')" class="flex-1 py-2 text-xs font-bold rounded-lg text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-all duration-200">
-                        💪 Bentuk Badan
+                    <button id="btn-calc-badan" onclick="switchCalculator('badan')" class="flex-1 py-2.5 text-xs sm:text-sm font-bold rounded-xl text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-all duration-300">
+                        💪 Badan
                     </button>
                 </div>
+
                 <!-- CALCULATOR 1: BMI -->
-                <div id="calc-bmi" class="calculator-panel space-y-4">
-                    <div class="glass-card rounded-2xl p-4 sm:p-5 shadow-sm border border-slate-200/50 dark:border-slate-800/50 space-y-4">
-                        <h4 class="text-sm sm:text-base font-bold flex items-center space-x-2">
-                            <span>⚖️</span>
-                            <span>Kalkulator BMI (Body Mass Index)</span>
+                <div id="calc-bmi" class="calculator-panel space-y-4 animate-fade-in-up delay-200">
+                    <div class="glass-card rounded-[2rem] p-5 sm:p-8 shadow-lg border border-slate-200/50 dark:border-slate-800/50 space-y-6">
+                        <h4 class="text-base sm:text-lg font-bold flex items-center space-x-2">
+                            <span>Index Jisim Badan (BMI)</span>
                         </h4>
-                        <div class="grid grid-cols-2 gap-4">
-                            <div class="space-y-1">
-                                <label class="text-xs font-bold text-slate-500 dark:text-slate-400">Berat (kg)</label>
-                                <input type="number" id="bmi-weight" placeholder="Cth: 65" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white text-sm focus:ring-2 focus:ring-iways-blue outline-none transition-all">
+                        <div class="grid grid-cols-2 gap-4 sm:gap-6">
+                            <div class="space-y-2">
+                                <label class="text-xs sm:text-sm font-bold text-slate-500 dark:text-slate-400">Berat (kg)</label>
+                                <input type="number" id="bmi-weight" placeholder="65" class="w-full px-5 py-3 rounded-2xl border-2 border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 text-slate-900 dark:text-white text-base font-semibold focus:border-iways-blue dark:focus:border-blue-500 outline-none transition-all shadow-inner hover:bg-white dark:hover:bg-slate-800">
                             </div>
-                            <div class="space-y-1">
-                                <label class="text-xs font-bold text-slate-500 dark:text-slate-400">Tinggi (cm)</label>
-                                <input type="number" id="bmi-height" placeholder="Cth: 170" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white text-sm focus:ring-2 focus:ring-iways-blue outline-none transition-all">
+                            <div class="space-y-2">
+                                <label class="text-xs sm:text-sm font-bold text-slate-500 dark:text-slate-400">Tinggi (cm)</label>
+                                <input type="number" id="bmi-height" placeholder="170" class="w-full px-5 py-3 rounded-2xl border-2 border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 text-slate-900 dark:text-white text-base font-semibold focus:border-iways-blue dark:focus:border-blue-500 outline-none transition-all shadow-inner hover:bg-white dark:hover:bg-slate-800">
                             </div>
                         </div>
-                        <button onclick="calculateBMI()" class="w-full py-2.5 bg-iways-blue text-white rounded-xl font-bold text-xs sm:text-sm shadow-md hover:bg-blue-800 active:scale-98 transition-all">
+                        <button onclick="calculateBMI()" class="w-full py-3.5 bg-gradient-to-r from-iways-blue to-blue-600 text-white rounded-2xl font-bold text-sm sm:text-base shadow-lg hover:shadow-blue-500/30 active:scale-95 transition-all duration-300">
                             Kira Status BMI
                         </button>
                         
                         <!-- BMI Result Box -->
-                        <div id="bmi-result-box" class="hidden rounded-xl p-4 text-center border transition-all duration-300">
-                            <span class="text-[10px] font-bold uppercase tracking-widest text-slate-500 dark:text-slate-400 block mb-1">Keputusan Skor</span>
-                            <div id="bmi-score" class="text-2xl font-extrabold text-slate-900 dark:text-white">0.0</div>
-                            <div id="bmi-status" class="text-xs sm:text-sm font-bold mt-1">Status Kesihatan</div>
-                            <p id="bmi-advise" class="text-[11px] text-slate-500 dark:text-slate-400 mt-2">Nasihat kesihatan...</p>
+                        <div id="bmi-result-box" class="hidden rounded-2xl p-5 text-center border-2 transition-all duration-500 transform scale-95 opacity-0">
+                            <span class="text-[10px] font-black uppercase tracking-widest block mb-2 opacity-70">Keputusan Skor Anda</span>
+                            <div id="bmi-score" class="text-4xl font-black tracking-tighter">0.0</div>
+                            <div id="bmi-status" class="text-sm sm:text-base font-bold mt-2 bg-white/20 inline-block px-4 py-1 rounded-full backdrop-blur-sm">Status</div>
+                            <p id="bmi-advise" class="text-xs sm:text-sm mt-3 font-medium opacity-90 leading-relaxed">Nasihat kesihatan...</p>
                         </div>
                     </div>
                 </div>
+
                 <!-- CALCULATOR 2: PINGGANG -->
-                <div id="calc-pinggang" class="calculator-panel space-y-4 hidden">
-                    <div class="glass-card rounded-2xl p-4 sm:p-5 shadow-sm border border-slate-200/50 dark:border-slate-800/50 space-y-4">
-                        <h4 class="text-sm sm:text-base font-bold flex items-center space-x-2">
-                            <span>📏</span>
-                            <span>Ukur Lilit Pinggang</span>
+                <div id="calc-pinggang" class="calculator-panel space-y-4 hidden animate-fade-in-up delay-200">
+                    <div class="glass-card rounded-[2rem] p-5 sm:p-8 shadow-lg border border-slate-200/50 dark:border-slate-800/50 space-y-6">
+                        <h4 class="text-base sm:text-lg font-bold flex items-center space-x-2">
+                            <span>Ukur Lilit Pinggang (Risiko Jantung)</span>
                         </h4>
-                        <div class="grid grid-cols-2 gap-4">
-                            <div class="space-y-1">
-                                <label class="text-xs font-bold text-slate-500 dark:text-slate-400">Jantina</label>
-                                <select id="waist-gender" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white text-sm focus:ring-2 focus:ring-iways-blue outline-none transition-all">
+                        <div class="grid grid-cols-2 gap-4 sm:gap-6">
+                            <div class="space-y-2">
+                                <label class="text-xs sm:text-sm font-bold text-slate-500 dark:text-slate-400">Jantina</label>
+                                <select id="waist-gender" class="w-full px-5 py-3 rounded-2xl border-2 border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 text-slate-900 dark:text-white text-base font-semibold focus:border-iways-blue dark:focus:border-blue-500 outline-none transition-all shadow-inner cursor-pointer hover:bg-white dark:hover:bg-slate-800">
                                     <option value="lelaki">Lelaki</option>
                                     <option value="wanita">Wanita</option>
                                 </select>
                             </div>
-                            <div class="space-y-1">
-                                <label class="text-xs font-bold text-slate-500 dark:text-slate-400">Ukur Lilit (cm)</label>
-                                <input type="number" id="waist-size" placeholder="Cth: 85" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white text-sm focus:ring-2 focus:ring-iways-blue outline-none transition-all">
+                            <div class="space-y-2">
+                                <label class="text-xs sm:text-sm font-bold text-slate-500 dark:text-slate-400">Ukur Lilit (cm)</label>
+                                <input type="number" id="waist-size" placeholder="85" class="w-full px-5 py-3 rounded-2xl border-2 border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 text-slate-900 dark:text-white text-base font-semibold focus:border-iways-blue dark:focus:border-blue-500 outline-none transition-all shadow-inner hover:bg-white dark:hover:bg-slate-800">
                             </div>
                         </div>
-                        <button onclick="calculateWaist()" class="w-full py-2.5 bg-iways-blue text-white rounded-xl font-bold text-xs sm:text-sm shadow-md hover:bg-blue-800 active:scale-98 transition-all">
+                        <button onclick="calculateWaist()" class="w-full py-3.5 bg-gradient-to-r from-iways-blue to-blue-600 text-white rounded-2xl font-bold text-sm sm:text-base shadow-lg hover:shadow-blue-500/30 active:scale-95 transition-all duration-300">
                             Semak Status Risiko
                         </button>
-                        <!-- Waist Result Box -->
-                        <div id="waist-result-box" class="hidden rounded-xl p-4 text-center border transition-all duration-300">
-                            <span class="text-[10px] font-bold uppercase tracking-widest text-slate-500 dark:text-slate-400 block mb-1">Keputusan Risiko Kesihatan</span>
-                            <div id="waist-status" class="text-lg font-extrabold text-slate-900 dark:text-white">Selamat</div>
-                            <p id="waist-advise" class="text-[11px] text-slate-500 dark:text-slate-400 mt-2">Panduan berdasarkan saranan KKM...</p>
+
+                        <div id="waist-result-box" class="hidden rounded-2xl p-5 text-center border-2 transition-all duration-500 transform scale-95 opacity-0">
+                            <span class="text-[10px] font-black uppercase tracking-widest block mb-2 opacity-70">Tahap Risiko</span>
+                            <div id="waist-status" class="text-2xl font-black tracking-tight">Selamat</div>
+                            <p id="waist-advise" class="text-xs sm:text-sm mt-3 font-medium opacity-90 leading-relaxed">Panduan berdasarkan saranan KKM...</p>
                         </div>
                     </div>
                 </div>
+
                 <!-- CALCULATOR 3: BENTUK BADAN -->
-                <div id="calc-badan" class="calculator-panel space-y-4 hidden">
-                    <div class="glass-card rounded-2xl p-4 sm:p-5 shadow-sm border border-slate-200/50 dark:border-slate-800/50 space-y-4">
-                        <div class="space-y-1">
-                            <h4 class="text-sm sm:text-base font-bold flex items-center space-x-2">
-                                <span>💪</span>
-                                <span>Analisis Bentuk Badan (Muscle-Fat)</span>
-                            </h4>
-                            <p class="text-[11px] text-slate-500 dark:text-slate-400">Analisis profil bentuk badan ideal berdasarkan nisbah jisim otot (SMM) dan berat lemak (BFM).</p>
+                <div id="calc-badan" class="calculator-panel space-y-4 hidden animate-fade-in-up delay-200">
+                    <div class="glass-card rounded-[2rem] p-5 sm:p-8 shadow-lg border border-slate-200/50 dark:border-slate-800/50 space-y-6">
+                        <div class="space-y-2">
+                            <h4 class="text-base sm:text-lg font-bold">Analisis Bentuk Badan (Muscle-Fat)</h4>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 font-medium">Berdasarkan ujian InBody: Nisbah jisim otot (SMM) dan berat lemak (BFM).</p>
                         </div>
                         
-                        <div class="grid grid-cols-3 gap-2">
-                            <div class="space-y-1">
-                                <label class="text-[10px] font-bold text-slate-500 dark:text-slate-400 block">Berat (kg)</label>
-                                <input type="number" id="mf-weight" placeholder="65" class="w-full px-2 py-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white text-xs focus:ring-2 focus:ring-iways-blue outline-none transition-all">
+                        <div class="grid grid-cols-3 gap-3">
+                            <div class="space-y-2">
+                                <label class="text-[10px] sm:text-xs font-bold text-slate-500 dark:text-slate-400 block truncate">Berat (kg)</label>
+                                <input type="number" id="mf-weight" placeholder="65" class="w-full px-3 py-3 rounded-xl border-2 border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 text-slate-900 dark:text-white font-semibold focus:border-iways-blue outline-none transition-all text-center">
                             </div>
-                            <div class="space-y-1">
-                                <label class="text-[10px] font-bold text-slate-500 dark:text-slate-400 block">Otot SMM (kg)</label>
-                                <input type="number" id="mf-smm" placeholder="30" class="w-full px-2 py-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white text-xs focus:ring-2 focus:ring-iways-blue outline-none transition-all">
+                            <div class="space-y-2">
+                                <label class="text-[10px] sm:text-xs font-bold text-slate-500 dark:text-slate-400 block truncate">Otot (kg)</label>
+                                <input type="number" id="mf-smm" placeholder="30" class="w-full px-3 py-3 rounded-xl border-2 border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 text-slate-900 dark:text-white font-semibold focus:border-iways-blue outline-none transition-all text-center">
                             </div>
-                            <div class="space-y-1">
-                                <label class="text-[10px] font-bold text-slate-500 dark:text-slate-400 block">Lemak BFM (kg)</label>
-                                <input type="number" id="mf-bfm" placeholder="15" class="w-full px-2 py-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white text-xs focus:ring-2 focus:ring-iways-blue outline-none transition-all">
+                            <div class="space-y-2">
+                                <label class="text-[10px] sm:text-xs font-bold text-slate-500 dark:text-slate-400 block truncate">Lemak (kg)</label>
+                                <input type="number" id="mf-bfm" placeholder="15" class="w-full px-3 py-3 rounded-xl border-2 border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 text-slate-900 dark:text-white font-semibold focus:border-iways-blue outline-none transition-all text-center">
                             </div>
                         </div>
-                        <button onclick="analyzeBodyShape()" class="w-full py-2.5 bg-iways-blue text-white rounded-xl font-bold text-xs sm:text-sm shadow-md hover:bg-blue-800 active:scale-98 transition-all">
+                        <button onclick="analyzeBodyShape()" class="w-full py-3.5 bg-gradient-to-r from-iways-blue to-blue-600 text-white rounded-2xl font-bold text-sm sm:text-base shadow-lg hover:shadow-blue-500/30 active:scale-95 transition-all duration-300">
                             Jana Analisis Badan
                         </button>
-                        <!-- Muscle-Fat Result Box -->
-                        <div id="mf-result-box" class="hidden rounded-xl p-4 border transition-all duration-300">
-                            <div class="flex items-center space-x-3">
-                                <div id="mf-badge" class="w-12 h-12 rounded-full flex items-center justify-center text-xl font-black text-white shrink-0 shadow-md">?</div>
+
+                        <div id="mf-result-box" class="hidden rounded-2xl p-5 border-2 transition-all duration-500 transform scale-95 opacity-0">
+                            <div class="flex items-center space-x-4 border-b border-black/10 dark:border-white/10 pb-4 mb-4">
+                                <div id="mf-badge" class="w-14 h-14 rounded-2xl flex items-center justify-center text-3xl font-black text-white shrink-0 shadow-lg">?</div>
                                 <div class="flex-1">
-                                    <span class="text-[10px] font-bold uppercase tracking-widest text-slate-500 dark:text-slate-400 block">Analisis Komposisi</span>
-                                    <h5 id="mf-shape-title" class="text-sm font-extrabold text-slate-950 dark:text-white">Bentuk Badan</h5>
+                                    <span class="text-[10px] font-black uppercase tracking-widest opacity-70 block mb-1">Klasifikasi Fizikal</span>
+                                    <h5 id="mf-shape-title" class="text-base sm:text-lg font-black tracking-tight">Bentuk Badan</h5>
                                 </div>
                             </div>
-                            <ul id="mf-advise-list" class="mt-3 text-[11px] text-slate-600 dark:text-slate-400 space-y-1.5 list-disc pl-4">
-                                <!-- Bullet points filled dynamically -->
+                            <ul id="mf-advise-list" class="text-xs sm:text-sm font-medium space-y-2.5 list-disc pl-5 opacity-90">
+                                <!-- Bullet points -->
                             </ul>
                         </div>
                     </div>
                 </div>
             </section>
+
             <!-- ========================================== -->
             <!-- TAB 4: PAUTAN & SUMBER                     -->
             <!-- ========================================== -->
-            <section id="tab-sumber" class="tab-panel p-4 sm:p-6 space-y-6 hidden">
-                <!-- Info Section Header -->
-                <div class="flex items-center space-x-2 border-b border-slate-100 dark:border-slate-800/80 pb-3">
-                    <span class="text-xl">🔗</span>
-                    <h3 class="text-base sm:text-lg font-bold text-slate-800 dark:text-slate-100">Pautan Pantas & Rujukan</h3>
+            <section id="tab-sumber" class="tab-panel p-4 sm:p-6 md:p-8 space-y-6 hidden max-w-6xl mx-auto w-full">
+                <div class="animate-fade-in-up flex items-center space-x-3 border-b border-slate-200 dark:border-slate-800 pb-4">
+                    <div class="p-2 bg-emerald-100 dark:bg-emerald-950/50 rounded-lg text-emerald-500">🔗</div>
+                    <h3 class="text-xl sm:text-2xl font-black text-gradient-blue tracking-tight">Pautan Pantas & Rujukan</h3>
                 </div>
+
                 <!-- Quick Links Cards -->
-                <div class="space-y-3">
-                    <!-- Link 1: Borang Laporan -->
-                    <a href="#" onclick="clickLink('Borang Laporan')" class="glass-card rounded-2xl p-3.5 shadow-sm border border-slate-200/50 dark:border-slate-800/50 flex items-center justify-between hover:border-iways-blue dark:hover:border-blue-500 hover:shadow-md transition-all duration-300 group">
-                        <div class="flex items-center space-x-3">
-                            <div class="p-2.5 rounded-xl bg-blue-50 dark:bg-blue-950/40 text-iways-blue dark:text-blue-400">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                                </svg>
+                <div class="space-y-4">
+                    <!-- Link 1 -->
+                    <a href="#" onclick="clickLink('Borang Laporan')" class="animate-fade-in-up delay-100 glass-card rounded-[1.5rem] p-4 shadow-sm border border-slate-200/50 dark:border-slate-800/50 flex items-center justify-between hover:border-iways-blue hover:shadow-lg hover:shadow-blue-500/10 transition-all duration-300 group hover:-translate-y-1">
+                        <div class="flex items-center space-x-4">
+                            <div class="p-3 rounded-2xl bg-gradient-to-br from-blue-100 to-blue-50 dark:from-blue-900/40 dark:to-blue-950/40 text-iways-blue dark:text-blue-400 group-hover:scale-110 transition-transform duration-300">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
                             </div>
                             <div>
-                                <h4 class="text-xs sm:text-sm font-bold text-slate-900 dark:text-white">Borang Laporan Aktiviti</h4>
-                                <p class="text-[10px] text-slate-400">Laporkan kemas kini inisiatif komuniti anda</p>
+                                <h4 class="text-sm sm:text-base font-bold text-slate-900 dark:text-white">Borang Laporan Aktiviti</h4>
+                                <p class="text-[11px] sm:text-xs text-slate-500 font-medium mt-0.5">Hantar laporan inisiatif komuniti</p>
                             </div>
                         </div>
-                        <svg class="w-4 h-4 text-slate-400 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                        </svg>
+                        <div class="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center group-hover:bg-iways-blue group-hover:text-white transition-colors">
+                            <svg class="w-4 h-4 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
+                        </div>
                     </a>
-                    <!-- Link 2: Modul Senaman -->
-                    <a href="#" onclick="clickLink('Muat Turun Modul')" class="glass-card rounded-2xl p-3.5 shadow-sm border border-slate-200/50 dark:border-slate-800/50 flex items-center justify-between hover:border-iways-green dark:hover:border-green-500 hover:shadow-md transition-all duration-300 group">
-                        <div class="flex items-center space-x-3">
-                            <div class="p-2.5 rounded-xl bg-green-50 dark:bg-green-950/40 text-iways-green dark:text-green-400">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
-                                </svg>
+
+                    <!-- Link 2 -->
+                    <a href="#" onclick="clickLink('Muat Turun Modul')" class="animate-fade-in-up delay-200 glass-card rounded-[1.5rem] p-4 shadow-sm border border-slate-200/50 dark:border-slate-800/50 flex items-center justify-between hover:border-iways-green hover:shadow-lg hover:shadow-green-500/10 transition-all duration-300 group hover:-translate-y-1">
+                        <div class="flex items-center space-x-4">
+                            <div class="p-3 rounded-2xl bg-gradient-to-br from-green-100 to-green-50 dark:from-green-900/40 dark:to-green-950/40 text-iways-green dark:text-green-400 group-hover:scale-110 transition-transform duration-300">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
                             </div>
                             <div>
-                                <h4 class="text-xs sm:text-sm font-bold text-slate-900 dark:text-white">Muat Turun Modul Senaman</h4>
-                                <p class="text-[10px] text-slate-400">Panduan kecergasan 10 minit lengkap</p>
+                                <h4 class="text-sm sm:text-base font-bold text-slate-900 dark:text-white">Modul Senaman iWAYS</h4>
+                                <p class="text-[11px] sm:text-xs text-slate-500 font-medium mt-0.5">Panduan 10 minit lengkap PDF</p>
                             </div>
                         </div>
-                        <svg class="w-4 h-4 text-slate-400 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                        </svg>
+                        <div class="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center group-hover:bg-iways-green group-hover:text-white transition-colors">
+                            <svg class="w-4 h-4 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
+                        </div>
                     </a>
-                    <!-- Link 3: Direktori KKM -->
-                    <a href="#" onclick="clickLink('Direktori KKM')" class="glass-card rounded-2xl p-3.5 shadow-sm border border-slate-200/50 dark:border-slate-800/50 flex items-center justify-between hover:border-iways-gold dark:hover:border-yellow-500 hover:shadow-md transition-all duration-300 group">
-                        <div class="flex items-center space-x-3">
-                            <div class="p-2.5 rounded-xl bg-yellow-50 dark:bg-yellow-950/40 text-yellow-600 dark:text-yellow-400">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
-                                </svg>
+
+                    <!-- Link 3 -->
+                    <a href="#" onclick="clickLink('Direktori KKM')" class="animate-fade-in-up delay-300 glass-card rounded-[1.5rem] p-4 shadow-sm border border-slate-200/50 dark:border-slate-800/50 flex items-center justify-between hover:border-iways-gold hover:shadow-lg hover:shadow-yellow-500/10 transition-all duration-300 group hover:-translate-y-1">
+                        <div class="flex items-center space-x-4">
+                            <div class="p-3 rounded-2xl bg-gradient-to-br from-yellow-100 to-yellow-50 dark:from-yellow-900/40 dark:to-yellow-950/40 text-yellow-600 dark:text-yellow-400 group-hover:scale-110 transition-transform duration-300">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
                             </div>
                             <div>
-                                <h4 class="text-xs sm:text-sm font-bold text-slate-900 dark:text-white">Direktori Kesihatan KKM Yan</h4>
-                                <p class="text-[10px] text-slate-400">Hubungi klinik dan hospital komuniti Yan</p>
+                                <h4 class="text-sm sm:text-base font-bold text-slate-900 dark:text-white">Direktori Kesihatan Yan</h4>
+                                <p class="text-[11px] sm:text-xs text-slate-500 font-medium mt-0.5">Hubungi fasiliti kesihatan rasmi</p>
                             </div>
                         </div>
-                        <svg class="w-4 h-4 text-slate-400 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                        </svg>
+                        <div class="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center group-hover:bg-iways-gold group-hover:text-white transition-colors">
+                            <svg class="w-4 h-4 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
+                        </div>
                     </a>
                 </div>
-                <!-- SLIDESHOW GALLERY WIDGET -->
-                <div class="glass-card rounded-2xl p-4 sm:p-5 shadow-sm border border-slate-200/50 dark:border-slate-800/50 space-y-4">
-                    <h4 class="text-sm sm:text-base font-bold flex items-center space-x-2">
+
+                <!-- SLIDESHOW GALLERY -->
+                <div class="animate-fade-in-up delay-400 glass-card rounded-[2rem] p-5 sm:p-6 shadow-lg border border-slate-200/50 dark:border-slate-800/50 space-y-5">
+                    <h4 class="text-base sm:text-lg font-bold flex items-center space-x-2 border-b border-slate-100 dark:border-slate-800/60 pb-3">
                         <span>📚</span>
-                        <span>Galeri Panduan Visual Asal</span>
+                        <span class="text-gradient-blue">Galeri Panduan Visual</span>
                     </h4>
                     
-                    <!-- Slider View Area -->
-                    <div class="relative w-full rounded-xl overflow-hidden aspect-[4/3] bg-slate-900 border border-slate-200/50 dark:border-slate-800 flex items-center justify-center">
-                        <div id="slides-container" class="w-full h-full flex transition-transform duration-500 ease-out">
-                            <!-- Slides filled dynamically in script to avoid ugly empty loads -->
+                    <div class="relative w-full rounded-2xl overflow-hidden aspect-[4/3] bg-slate-900 border border-slate-200/50 dark:border-slate-800 flex items-center justify-center shadow-inner group">
+                        <div id="slides-container" class="w-full h-full flex transition-transform duration-700 ease-in-out">
+                            <!-- Slides generated via JS -->
                         </div>
                         
-                        <!-- Navigation Arrows -->
-                        <button onclick="prevSlide()" class="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/40 text-white flex items-center justify-center hover:bg-black/60 focus:outline-none z-10 transition-colors">
-                            &#10094;
+                        <!-- Nav Controls -->
+                        <button onclick="prevSlide()" class="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white flex items-center justify-center hover:bg-iways-blue hover:scale-110 focus:outline-none z-10 transition-all duration-300 opacity-0 group-hover:opacity-100 shadow-lg">
+                            <svg class="w-5 h-5 ml-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"></path></svg>
                         </button>
-                        <button onclick="nextSlide()" class="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/40 text-white flex items-center justify-center hover:bg-black/60 focus:outline-none z-10 transition-colors">
-                            &#10095;
+                        <button onclick="nextSlide()" class="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white flex items-center justify-center hover:bg-iways-blue hover:scale-110 focus:outline-none z-10 transition-all duration-300 opacity-0 group-hover:opacity-100 shadow-lg">
+                            <svg class="w-5 h-5 mr-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
                         </button>
-                        <!-- Info tag -->
-                        <div class="absolute bottom-2 left-1/2 -translate-x-1/2 bg-black/60 backdrop-blur-sm text-[10px] font-bold text-white px-3 py-1 rounded-full z-10">
-                            <span id="slide-num">1</span>/8
+
+                        <div class="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/50 backdrop-blur-md text-[11px] font-bold text-white px-4 py-1.5 rounded-full z-10 border border-white/10 shadow-lg">
+                            <span id="slide-num">1</span> / 8
                         </div>
                     </div>
                 </div>
             </section>
         </main>
+
         <!-- APP FOOTER & MOBILE NAVIGATION BOTTOM BAR -->
-        <nav class="bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 px-2 py-1 flex items-center justify-around shadow-[0_-4px_10px_rgba(0,0,0,0.03)] shrink-0 z-10">
+        <nav class="bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl border-t border-slate-200 dark:border-slate-800 px-3 py-2 flex items-center justify-around shadow-[0_-10px_30px_rgba(0,0,0,0.06)] shrink-0 z-50 relative">
+            
+            <!-- Animated Active Pill -->
+            <div id="nav-indicator" class="absolute top-2 left-[12.5%] w-[20%] h-[calc(100%-16px)] bg-blue-50 dark:bg-blue-900/30 border border-blue-100 dark:border-blue-800/30 rounded-2xl -translate-x-1/2 transition-all duration-500 cubic-bezier(0.4, 0, 0.2, 1) z-0 shadow-sm"></div>
+
             <!-- Nav Item 1: Utama -->
-            <button id="nav-utama" onclick="switchTab('utama')" class="flex-1 py-1.5 flex flex-col items-center justify-center text-iways-blue dark:text-blue-400 font-bold transition-all duration-200 scale-100">
-                <svg class="w-5 h-5 mb-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <button id="nav-utama" onclick="switchTab('utama')" class="relative z-10 flex-1 py-1.5 flex flex-col items-center justify-center text-iways-blue dark:text-blue-400 font-bold transition-all duration-300 scale-105">
+                <svg class="w-6 h-6 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
                 </svg>
-                <span class="text-[9px] sm:text-[10px] tracking-wide">Utama</span>
+                <span class="text-[10px] tracking-wide">Utama</span>
             </button>
+
             <!-- Nav Item 2: Aktiviti -->
-            <button id="nav-aktiviti" onclick="switchTab('aktiviti')" class="flex-1 py-1.5 flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 font-semibold hover:text-slate-600 transition-all duration-200">
-                <svg class="w-5 h-5 mb-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <button id="nav-aktiviti" onclick="switchTab('aktiviti')" class="relative z-10 flex-1 py-1.5 flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 font-semibold hover:text-slate-600 dark:hover:text-slate-300 transition-all duration-300 scale-100">
+                <svg class="w-6 h-6 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                 </svg>
-                <span class="text-[9px] sm:text-[10px] tracking-wide">Aktiviti</span>
+                <span class="text-[10px] tracking-wide">Aktiviti</span>
             </button>
+
             <!-- Nav Item 3: Kalkulator -->
-            <button id="nav-kalkulator" onclick="switchTab('kalkulator')" class="flex-1 py-1.5 flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 font-semibold hover:text-slate-600 transition-all duration-200">
-                <svg class="w-5 h-5 mb-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <button id="nav-kalkulator" onclick="switchTab('kalkulator')" class="relative z-10 flex-1 py-1.5 flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 font-semibold hover:text-slate-600 dark:hover:text-slate-300 transition-all duration-300 scale-100">
+                <svg class="w-6 h-6 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
                 </svg>
-                <span class="text-[9px] sm:text-[10px] tracking-wide">Kalkulator</span>
+                <span class="text-[10px] tracking-wide">Alatan</span>
             </button>
+
             <!-- Nav Item 4: Pautan -->
-            <button id="nav-sumber" onclick="switchTab('sumber')" class="flex-1 py-1.5 flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 font-semibold hover:text-slate-600 transition-all duration-200">
-                <svg class="w-5 h-5 mb-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <button id="nav-sumber" onclick="switchTab('sumber')" class="relative z-10 flex-1 py-1.5 flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 font-semibold hover:text-slate-600 dark:hover:text-slate-300 transition-all duration-300 scale-100">
+                <svg class="w-6 h-6 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path>
                 </svg>
-                <span class="text-[9px] sm:text-[10px] tracking-wide">Sumber</span>
+                <span class="text-[10px] tracking-wide">Sumber</span>
             </button>
         </nav>
+
         <!-- TOAST NOTIFICATION CONTAINER -->
-        <div id="toast-container" class="absolute bottom-16 left-1/2 -translate-x-1/2 z-50 pointer-events-none transition-all duration-300 transform translate-y-5 opacity-0">
-            <div class="px-4 py-2.5 rounded-xl bg-slate-900/95 dark:bg-white text-white dark:text-slate-950 text-xs font-bold shadow-2xl flex items-center space-x-2 border border-slate-800/80 dark:border-white/10">
-                <span id="toast-icon">ℹ️</span>
-                <span id="toast-message">Mesej Notifikasi</span>
+        <div id="toast-container" class="absolute bottom-24 left-1/2 -translate-x-1/2 z-50 pointer-events-none transition-all duration-500 transform translate-y-10 opacity-0 scale-90">
+            <div class="px-5 py-3 rounded-2xl bg-slate-900/95 dark:bg-white backdrop-blur-md text-white dark:text-slate-950 text-sm font-bold shadow-2xl flex items-center space-x-3 border border-slate-700/50 dark:border-white/10">
+                <span id="toast-icon" class="text-lg drop-shadow-md">ℹ️</span>
+                <span id="toast-message" class="tracking-wide">Mesej Notifikasi</span>
             </div>
         </div>
     </div>
+
     <!-- JAVASCRIPT LOGIC -->
     <script>
         // Slideshow images data
@@ -602,52 +612,49 @@
             { src: "https://i.postimg.cc/Qd003PKY/Tips-Sayangi-Diri.png", alt: "Tips Sayangi Diri" },
             { src: "https://i.postimg.cc/YCpbTk0Z/Tips-Tidur-Lena-Berkualiti.jpg", alt: "Tips Tidur Lena Berkualiti" }
         ];
+
         let currentSlideIdx = 0;
-        // Initialize Slides
+
         function initSlides() {
             const container = document.getElementById('slides-container');
-            container.innerHTML = slidesData.map((slide, idx) => `
+            container.innerHTML = slidesData.map(slide => `
                 <div class="w-full h-full flex-shrink-0 relative">
-                    <img src="${slide.src}" alt="${slide.alt}" class="w-full h-full object-contain bg-slate-950" loading="lazy">
+                    <img src="${slide.src}" alt="${slide.alt}" class="w-full h-full object-contain bg-slate-950/50 backdrop-blur-sm" loading="lazy">
                 </div>
             `).join('');
             updateSlideView();
         }
+
         function updateSlideView() {
             const container = document.getElementById('slides-container');
             container.style.transform = `translateX(-${currentSlideIdx * 100}%)`;
             document.getElementById('slide-num').innerText = currentSlideIdx + 1;
         }
+
         function nextSlide() {
             currentSlideIdx = (currentSlideIdx + 1) % slidesData.length;
             updateSlideView();
         }
+
         function prevSlide() {
             currentSlideIdx = (currentSlideIdx - 1 + slidesData.length) % slidesData.length;
             updateSlideView();
         }
-        // Auto slide play
-        let autoSlideTimer = setInterval(nextSlide, 4500);
-        
-        // Reset timer on manual nav
+
+        let autoSlideTimer = setInterval(nextSlide, 5000);
         function resetAutoSlide() {
             clearInterval(autoSlideTimer);
-            autoSlideTimer = setInterval(nextSlide, 4500);
+            autoSlideTimer = setInterval(nextSlide, 5000);
         }
-        // Event Listeners for slide buttons
-        document.querySelectorAll('[onclick="prevSlide()"], [onclick="nextSlide()"]').forEach(btn => {
-            btn.addEventListener('click', resetAutoSlide);
-        });
-        // Initialize App on DOM Load
+
         document.addEventListener('DOMContentLoaded', () => {
             initSlides();
-            // Start counter animation
             setTimeout(() => {
                 animateCounter('stat-warga');
                 animateCounter('stat-aktiviti');
                 animateCounter('stat-jam');
-            }, 500);
-            // Dark Mode check
+            }, 600);
+
             if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
                 document.documentElement.classList.add('dark');
                 document.getElementById('sun-icon').classList.remove('hidden');
@@ -658,7 +665,7 @@
                 document.getElementById('moon-icon').classList.remove('hidden');
             }
         });
-        // Dark Mode Toggle
+
         function toggleDarkMode() {
             const isDark = document.documentElement.classList.toggle('dark');
             localStorage.setItem('theme', isDark ? 'dark' : 'light');
@@ -676,30 +683,42 @@
                 showToast('☀️ Mod cerah diaktifkan', 'success');
             }
         }
-        // Dynamic Tab Switching
+
         function switchTab(tabId) {
-            // Hide all tab panels
+            // Hide all tabs
             document.querySelectorAll('.tab-panel').forEach(panel => {
                 panel.classList.add('hidden');
                 panel.classList.remove('block');
             });
             
-            // Show target panel
             const targetPanel = document.getElementById(`tab-${tabId}`);
             targetPanel.classList.remove('hidden');
             targetPanel.classList.add('block');
             
-            // Reset nav button styling
+            // Re-trigger entrance animations for wow factor
+            const animatedElements = targetPanel.querySelectorAll('.animate-fade-in-up');
+            animatedElements.forEach(el => {
+                el.style.animation = 'none';
+                el.offsetHeight; /* trigger reflow */
+                el.style.animation = null; 
+            });
+
+            // Move the background pill indicator
+            const navPositions = { 'utama': '12.5%', 'aktiviti': '37.5%', 'kalkulator': '62.5%', 'sumber': '87.5%' };
+            const indicator = document.getElementById('nav-indicator');
+            if(indicator) indicator.style.left = navPositions[tabId];
+
+            // Update Nav Item styles
             const navIds = ['utama', 'aktiviti', 'kalkulator', 'sumber'];
             navIds.forEach(id => {
                 const navBtn = document.getElementById(`nav-${id}`);
                 if (id === tabId) {
-                    navBtn.className = "flex-1 py-1.5 flex flex-col items-center justify-center text-iways-blue dark:text-blue-400 font-bold transition-all duration-200 scale-105";
+                    navBtn.className = "relative z-10 flex-1 py-1.5 flex flex-col items-center justify-center text-iways-blue dark:text-blue-400 font-bold transition-all duration-300 scale-105";
                 } else {
-                    navBtn.className = "flex-1 py-1.5 flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 font-semibold hover:text-slate-600 transition-all duration-200 scale-100";
+                    navBtn.className = "relative z-10 flex-1 py-1.5 flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 font-semibold hover:text-slate-600 dark:hover:text-slate-300 transition-all duration-300 scale-100 hover:-translate-y-0.5";
                 }
             });
-            // Re-trigger counter animations if Utama is chosen
+
             if (tabId === 'utama') {
                 document.getElementById('stat-warga').innerText = '0';
                 document.getElementById('stat-aktiviti').innerText = '0';
@@ -709,12 +728,12 @@
                 animateCounter('stat-jam');
             }
         }
-        // Animate Stat Counters
+
         function animateCounter(id) {
             const el = document.getElementById(id);
             const target = parseInt(el.getAttribute('data-target'));
             let count = 0;
-            const duration = 1200; // ms
+            const duration = 1500; 
             const stepTime = Math.max(Math.floor(duration / target), 15);
             const increment = Math.ceil(target / (duration / stepTime));
             
@@ -728,195 +747,207 @@
                 }
             }, stepTime);
         }
-        // Toast Messages
+
         function showToast(message, type = 'info') {
             const toast = document.getElementById('toast-container');
             const toastMsg = document.getElementById('toast-message');
             const toastIcon = document.getElementById('toast-icon');
             
-            // Set Icon
             if (type === 'success') toastIcon.innerText = '✅';
             else if (type === 'error') toastIcon.innerText = '⚠️';
-            else if (type === 'info') toastIcon.innerText = 'ℹ️';
+            else if (type === 'info') toastIcon.innerText = '💡';
+            
             toastMsg.innerText = message;
             
-            // Pop Toast
-            toast.classList.remove('opacity-0', 'translate-y-5');
-            toast.classList.add('opacity-100', 'translate-y-0');
+            toast.classList.remove('opacity-0', 'translate-y-10', 'scale-90');
+            toast.classList.add('opacity-100', 'translate-y-0', 'scale-100');
             
             setTimeout(() => {
-                toast.classList.remove('opacity-100', 'translate-y-0');
-                toast.classList.add('opacity-0', 'translate-y-5');
+                toast.classList.remove('opacity-100', 'translate-y-0', 'scale-100');
+                toast.classList.add('opacity-0', 'translate-y-10', 'scale-90');
             }, 3000);
         }
-        // Video mock controls
+
         function playMockVideo() {
             document.getElementById('video-player-frame').classList.remove('hidden');
-            showToast('🎥 Memuatkan video taklimat iWAYS...', 'info');
+            document.getElementById('video-player-frame').classList.add('flex');
+            showToast('🎥 Memuatkan tayangan perdana...', 'info');
         }
+
         function stopMockVideo() {
             document.getElementById('video-player-frame').classList.add('hidden');
+            document.getElementById('video-player-frame').classList.remove('flex');
         }
-        // RSVP System
+
         function rsvpEvent(btn, eventName) {
-            if (btn.innerText.includes('RSVP Berjaya')) return;
+            if (btn.innerText.includes('Berjaya')) return;
             
-            // Success State
             btn.innerText = 'RSVP Berjaya ✓';
-            btn.className = "py-1.5 px-3 rounded-lg bg-iways-green text-white text-xs font-bold cursor-not-allowed shadow-inner transition-colors duration-300";
+            btn.className = "py-2 px-4 rounded-lg bg-gradient-to-r from-iways-green to-green-500 text-white text-xs font-bold cursor-not-allowed shadow-inner transition-all duration-300";
             
-            // Update local state count
             const wargaEl = document.getElementById('stat-warga');
             let currentWargaVal = parseInt(wargaEl.innerText.replace(/,/g, ''));
             if (!isNaN(currentWargaVal)) {
                 wargaEl.innerText = (currentWargaVal + 1).toLocaleString('ms-MY');
                 wargaEl.setAttribute('data-target', currentWargaVal + 1);
+                wargaEl.classList.add('text-iways-green', 'scale-110', 'transition-all');
+                setTimeout(() => wargaEl.classList.remove('text-iways-green', 'scale-110'), 500);
             }
-            
-            showToast(`Daftar kehadiran ${eventName} Berjaya!`, 'success');
+            showToast(`Tiket ${eventName} disahkan!`, 'success');
         }
-        // Attendance Form CTA Alert
+
         function registerAttendance() {
-            showToast('Membuka Borang Kehadiran iWAYS...', 'success');
-            // Mock delay to open external link or form
+            showToast('Menyambung ke borang rasmi...', 'success');
             setTimeout(() => {
-                alert('Pautan Borang Kehadiran Warga Yan:\nhttps://forms.gle/iWAYS2026Yan');
-            }, 400);
+                alert('Sistem Pendaftaran iWAYS Yan 2026\nPautan: https://forms.gle/iWAYS2026Yan');
+            }, 500);
         }
-        // Switch Calculator inner sub-tab
+
         function switchCalculator(calcType) {
             document.querySelectorAll('.calculator-panel').forEach(panel => {
                 panel.classList.add('hidden');
             });
-            document.getElementById(`calc-${calcType}`).classList.remove('hidden');
             
+            const targetPanel = document.getElementById(`calc-${calcType}`);
+            targetPanel.classList.remove('hidden');
+            // Retrigger animation inside calc panel
+            targetPanel.style.animation = 'none';
+            targetPanel.offsetHeight; 
+            targetPanel.style.animation = null;
+
             const btnBmi = document.getElementById('btn-calc-bmi');
             const btnWaist = document.getElementById('btn-calc-pinggang');
             const btnBadan = document.getElementById('btn-calc-badan');
-            btnBmi.className = "flex-1 py-2 text-xs font-bold rounded-lg transition-all duration-200 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white";
-            btnWaist.className = "flex-1 py-2 text-xs font-bold rounded-lg transition-all duration-200 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white";
-            btnBadan.className = "flex-1 py-2 text-xs font-bold rounded-lg transition-all duration-200 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white";
-            if (calcType === 'bmi') {
-                btnBmi.className = "flex-1 py-2 text-xs font-bold rounded-lg text-slate-900 dark:text-white bg-white dark:bg-slate-700 shadow-sm transition-all duration-200";
-            } else if (calcType === 'pinggang') {
-                btnWaist.className = "flex-1 py-2 text-xs font-bold rounded-lg text-slate-900 dark:text-white bg-white dark:bg-slate-700 shadow-sm transition-all duration-200";
-            } else if (calcType === 'badan') {
-                btnBadan.className = "flex-1 py-2 text-xs font-bold rounded-lg text-slate-900 dark:text-white bg-white dark:bg-slate-700 shadow-sm transition-all duration-200";
-            }
+            
+            const inactiveClass = "flex-1 py-2.5 text-xs sm:text-sm font-bold rounded-xl text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-all duration-300 transform scale-100";
+            const activeClass = "flex-1 py-2.5 text-xs sm:text-sm font-bold rounded-xl text-iways-blue dark:text-white bg-white dark:bg-slate-700 shadow-md transition-all duration-300 transform scale-105";
+
+            btnBmi.className = calcType === 'bmi' ? activeClass : inactiveClass;
+            btnWaist.className = calcType === 'pinggang' ? activeClass : inactiveClass;
+            btnBadan.className = calcType === 'badan' ? activeClass : inactiveClass;
         }
-        // Calculator 1: BMI logic
+
+        function showResultBox(resBoxId, colorBase) {
+            const resBox = document.getElementById(resBoxId);
+            resBox.classList.remove('hidden');
+            // Small delay to allow display:block to apply before animating opacity
+            setTimeout(() => {
+                resBox.classList.remove('opacity-0', 'scale-95');
+                resBox.classList.add('opacity-100', 'scale-100');
+            }, 50);
+            
+            resBox.className = `rounded-2xl p-5 text-center border-2 transition-all duration-500 transform scale-100 opacity-100 bg-${colorBase}-50 dark:bg-${colorBase}-900/30 border-${colorBase}-200 dark:border-${colorBase}-800 text-${colorBase}-800 dark:text-${colorBase}-300 mt-4`;
+        }
+
         function calculateBMI() {
             const weightVal = parseFloat(document.getElementById('bmi-weight').value);
-            const heightVal = parseFloat(document.getElementById('bmi-height').value) / 100; // to meters
+            const heightVal = parseFloat(document.getElementById('bmi-height').value) / 100; 
             
             if (isNaN(weightVal) || isNaN(heightVal) || weightVal <= 0 || heightVal <= 0) {
-                showToast('Masukkan berat & tinggi yang sah.', 'error');
+                showToast('Data tidak lengkap. Sila semak semula.', 'error');
                 return;
             }
+
             const bmi = (weightVal / (heightVal * heightVal)).toFixed(1);
-            const resBox = document.getElementById('bmi-result-box');
-            const scoreEl = document.getElementById('bmi-score');
+            document.getElementById('bmi-score').innerText = bmi;
             const statusEl = document.getElementById('bmi-status');
             const adviseEl = document.getElementById('bmi-advise');
-            scoreEl.innerText = bmi;
-            resBox.classList.remove('hidden');
+
+            let colorBase = '';
             if (bmi < 18.5) {
-                resBox.className = "rounded-xl p-4 text-center border bg-sky-50 dark:bg-sky-950/30 border-sky-200 dark:border-sky-800 text-sky-800 dark:text-sky-300 transition-all duration-300";
-                statusEl.innerText = "Kekurangan Berat Badan ⚠️";
-                adviseEl.innerText = "Anda dinasihatkan menambah pengambilan kalori sihat harian dan melakukan latihan otot ringan.";
+                colorBase = 'sky';
+                statusEl.innerText = "Kekurangan Berat ⚠️";
+                adviseEl.innerText = "Tambah pengambilan kalori sihat harian dan lakukan senaman ringan membina otot.";
             } else if (bmi >= 18.5 && bmi < 25) {
-                resBox.className = "rounded-xl p-4 text-center border bg-green-50 dark:bg-green-950/30 border-green-200 dark:border-green-800 text-green-800 dark:text-green-300 transition-all duration-300 animate-bounce";
-                statusEl.innerText = "Tahniah! Berat Badan Sihat & Ideal 🏆";
-                adviseEl.innerText = "Kekalkan pola pemakanan sihat 'Suku-Suku Separuh' dan teruskan gaya hidup aktif ini!";
-                // Stop bounce after a moment
-                setTimeout(() => resBox.classList.remove('animate-bounce'), 1000);
+                colorBase = 'green';
+                statusEl.innerText = "Sihat & Ideal 🏆";
+                adviseEl.innerText = "Tahniah! Teruskan amalan diet seimbang 'Suku-Suku Separuh' dan gaya hidup aktif.";
             } else if (bmi >= 25 && bmi < 30) {
-                resBox.className = "rounded-xl p-4 text-center border bg-amber-50 dark:bg-amber-950/30 border-amber-200 dark:border-amber-800 text-amber-800 dark:text-amber-300 transition-all duration-300";
-                statusEl.innerText = "Berlebihan Berat Badan ⚠️";
-                adviseEl.innerText = "Hadkan minuman manis & makanan berlemak. Cadangan senaman: 150 minit seminggu kardio sederhana.";
+                colorBase = 'amber';
+                statusEl.innerText = "Berlebihan Berat ⚠️";
+                adviseEl.innerText = "Kawal minuman manis. Cadangan: 150 minit senaman kardio seminggu.";
             } else {
-                resBox.className = "rounded-xl p-4 text-center border bg-rose-50 dark:bg-rose-950/30 border-rose-200 dark:border-rose-800 text-rose-800 dark:text-rose-300 transition-all duration-300";
+                colorBase = 'rose';
                 statusEl.innerText = "Obesiti Kronik 🚨";
-                adviseEl.innerText = "Sila rujuk Klinik Kesihatan terdekat di Yan untuk saringan kesihatan jantung dan khidmat nasihat diet khas.";
+                adviseEl.innerText = "Sila dapatkan khidmat nasihat diet dan saringan di Klinik Kesihatan terdekat.";
             }
-            showToast('BMI berjaya dikira!', 'success');
+            
+            showResultBox('bmi-result-box', colorBase);
+            showToast('Pengiraan BMI selesai.', 'success');
         }
-        // Calculator 2: Waist status
+
         function calculateWaist() {
             const gender = document.getElementById('waist-gender').value;
             const size = parseFloat(document.getElementById('waist-size').value);
+
             if (isNaN(size) || size <= 0) {
-                showToast('Masukkan saiz pinggang yang sah.', 'error');
+                showToast('Masukkan ukuran yang betul.', 'error');
                 return;
             }
-            const resBox = document.getElementById('waist-result-box');
+
             const statusEl = document.getElementById('waist-status');
             const adviseEl = document.getElementById('waist-advise');
-            
-            resBox.classList.remove('hidden');
             const limit = (gender === 'lelaki') ? 90 : 80;
+
+            let colorBase = '';
             if (size < limit) {
-                resBox.className = "rounded-xl p-4 text-center border bg-green-50 dark:bg-green-950/30 border-green-200 dark:border-green-800 text-green-800 dark:text-green-300 transition-all duration-300";
-                statusEl.innerText = "Julat Selamat & Sihat ✅";
-                adviseEl.innerText = `Lilitan pinggang anda adalah di bawah batas risiko (${limit}cm untuk ${gender}). Teruskan kawalan pemakanan.`;
+                colorBase = 'green';
+                statusEl.innerText = "Julat Selamat ✅";
+                adviseEl.innerText = `Saiz (${size}cm) adalah ideal (Bawah ${limit}cm). Teruskan penjagaan kesihatan.`;
             } else {
-                resBox.className = "rounded-xl p-4 text-center border bg-rose-50 dark:bg-rose-950/30 border-rose-200 dark:border-rose-800 text-rose-800 dark:text-rose-300 transition-all duration-300";
-                statusEl.innerText = "Risiko Penyakit Kardiovaskular Tinggi 🚨";
-                adviseEl.innerText = `Saiz pinggang melebihi had selamat (${limit}cm). Risiko mendapat kencing manis & tekanan darah tinggi meningkat. Sila amalkan senaman pinggul & perut.`;
+                colorBase = 'rose';
+                statusEl.innerText = "Berisiko Tinggi 🚨";
+                adviseEl.innerText = `Saiz (${size}cm) melepasi had. Risiko masalah jantung & diabetes adalah lebih tinggi.`;
             }
-            showToast('Status Pinggang berjaya dikira!', 'success');
+
+            showResultBox('waist-result-box', colorBase);
+            showToast('Analisis pinggang selesai.', 'success');
         }
-        // Calculator 3: Muscle Fat Body Shape
+
         function analyzeBodyShape() {
             const w = parseFloat(document.getElementById('mf-weight').value);
             const smm = parseFloat(document.getElementById('mf-smm').value);
             const bfm = parseFloat(document.getElementById('mf-bfm').value);
+
             if (isNaN(w) || isNaN(smm) || isNaN(bfm) || w <= 0 || smm <= 0 || bfm <= 0) {
-                showToast('Lengkapkan nilai berat, otot, dan lemak.', 'error');
+                showToast('Isi semua metrik fizikal.', 'error');
                 return;
             }
+
             const resBox = document.getElementById('mf-result-box');
             const badge = document.getElementById('mf-badge');
             const title = document.getElementById('mf-shape-title');
             const adviseList = document.getElementById('mf-advise-list');
+
             resBox.classList.remove('hidden');
+            setTimeout(() => {
+                resBox.classList.remove('opacity-0', 'scale-95');
+                resBox.classList.add('opacity-100', 'scale-100');
+            }, 50);
+
             if (smm < w && smm < bfm) {
-                // C-Shape
                 badge.innerText = 'C';
-                badge.className = "w-12 h-12 rounded-full flex items-center justify-center text-xl font-black shrink-0 shadow-md bg-rose-500 text-white";
-                resBox.className = "rounded-xl p-4 border bg-rose-50 dark:bg-rose-950/30 border-rose-200 dark:border-rose-800 text-rose-800 dark:text-rose-300 transition-all duration-300";
-                title.innerText = "Bentuk Badan 'C-Shape' ⚠️";
-                adviseList.innerHTML = `
-                    <li><strong>Lemak Tinggi, Otot Rendah:</strong> Kebarangkalian lemak berlebihan tinggi.</li>
-                    <li>Fokus pada latihan mengangkat beban (Strength Training) 2-3 kali seminggu.</li>
-                    <li>Lebihkan pemakanan tinggi protein (ayam, ikan, telur, tahu).</li>
-                `;
+                badge.className = "w-14 h-14 rounded-2xl flex items-center justify-center text-3xl font-black shrink-0 shadow-lg bg-gradient-to-br from-rose-400 to-rose-600 text-white";
+                resBox.className = "rounded-2xl p-5 border-2 transition-all duration-500 transform scale-100 opacity-100 bg-rose-50 dark:bg-rose-900/30 border-rose-200 dark:border-rose-800 text-rose-800 dark:text-rose-300 mt-4";
+                title.innerText = "Kategori 'C-Shape' ⚠️";
+                adviseList.innerHTML = `<li>Lemak tinggi, jisim otot sangat rendah.</li><li>Fokus kepada senaman angkat beban.</li><li>Tingkatkan pengambilan protein harian.</li>`;
             } else if (smm > w && smm > bfm) {
-                // D-Shape
                 badge.innerText = 'D';
-                badge.className = "w-12 h-12 rounded-full flex items-center justify-center text-xl font-black shrink-0 shadow-md bg-green-500 text-white";
-                resBox.className = "rounded-xl p-4 border bg-green-50 dark:bg-green-950/30 border-green-200 dark:border-green-800 text-green-800 dark:text-green-300 transition-all duration-300";
-                title.innerText = "Bentuk Badan 'D-Shape' 🏆";
-                adviseList.innerHTML = `
-                    <li><strong>Bentuk Tubuh Atletik & Kuat:</strong> Struktur terbaik & ideal.</li>
-                    <li>Sistem metabolisme anda tinggi dan pembakaran lemak berkesan.</li>
-                    <li>Kekalkan gaya hidup aktif, kawal rehat otot pasca senaman.</li>
-                `;
+                badge.className = "w-14 h-14 rounded-2xl flex items-center justify-center text-3xl font-black shrink-0 shadow-lg bg-gradient-to-br from-green-400 to-green-600 text-white";
+                resBox.className = "rounded-2xl p-5 border-2 transition-all duration-500 transform scale-100 opacity-100 bg-green-50 dark:bg-green-900/30 border-green-200 dark:border-green-800 text-green-800 dark:text-green-300 mt-4";
+                title.innerText = "Kategori 'D-Shape' 🏆";
+                adviseList.innerHTML = `<li>Bentuk tubuh atletik & pembakaran kalori sangat cekap.</li><li>Struktur ideal yang patut dikekalkan.</li><li>Pastikan rehat otot yang mencukupi.</li>`;
             } else {
-                // I-Shape
                 badge.innerText = 'I';
-                badge.className = "w-12 h-12 rounded-full flex items-center justify-center text-xl font-black shrink-0 shadow-md bg-amber-500 text-white";
-                resBox.className = "rounded-xl p-4 border bg-amber-50 dark:bg-amber-950/30 border-amber-200 dark:border-amber-800 text-amber-800 dark:text-amber-300 transition-all duration-300";
-                title.innerText = "Bentuk Badan 'I-Shape' ✨";
-                adviseList.innerHTML = `
-                    <li><strong>Seimbang dan Sihat:</strong> Kadar otot dan lemak rata serta stabil.</li>
-                    <li>Sesuai untuk mengekalkan berat badan semasa.</li>
-                    <li>Jika mahu membina tubuh pejal (D-Shape), tambah intensiti latihan bebanan.</li>
-                `;
+                badge.className = "w-14 h-14 rounded-2xl flex items-center justify-center text-3xl font-black shrink-0 shadow-lg bg-gradient-to-br from-amber-400 to-amber-600 text-white";
+                resBox.className = "rounded-2xl p-5 border-2 transition-all duration-500 transform scale-100 opacity-100 bg-amber-50 dark:bg-amber-900/30 border-amber-200 dark:border-amber-800 text-amber-800 dark:text-amber-300 mt-4";
+                title.innerText = "Kategori 'I-Shape' ✨";
+                adviseList.innerHTML = `<li>Fizikal seimbang, stabil & sihat.</li><li>Mudah untuk mengekalkan berat badan.</li><li>Boleh tambah senaman beban jika mahu bentuk 'D'.</li>`;
             }
+
             showToast('Analisis Bentuk Badan Berjaya!', 'success');
         }
-        // Link redirection feedback
+
         function clickLink(linkName) {
             showToast(`Membuka pautan: ${linkName}...`, 'info');
         }
