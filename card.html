@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kad Digital Peserta IWAYS</title>
+    <style>
+        /* Gaya asas untuk nampak macam kad */
+        body { 
+            background-color: #f4f4f9; 
+            display: flex; 
+            justify-content: center; 
+            padding-top: 50px; 
+            font-family: Arial, sans-serif; 
+        }
+        .card { 
+            background: white; 
+            border-radius: 15px; 
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1); 
+            padding: 20px; 
+            width: 320px; 
+            text-align: center; 
+        }
+        .profile-pic { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin-bottom: 15px; border: 3px solid #6a1b9a; }
+        .qr-code { width: 150px; height: 150px; margin-top: 15px; border: 1px solid #ddd; padding: 5px; border-radius: 8px;}
+        .status { font-weight: bold; color: white; background-color: #28a745; padding: 4px 10px; border-radius: 12px; font-size: 0.9em; }
+        h2 { margin: 5px 0; color: #333; font-size: 1.4em;}
+        p { margin: 5px 0; color: #555; }
+        .health-info { background-color: #fff3cd; padding: 10px; border-radius: 8px; font-size: 0.9em; margin-top: 15px; text-align: left;}
+    </style>
+</head>
+<body>
+
+    <div class="card" id="participantCard">
+        <h3>Memuatkan data... ⏳</h3>
+        <p>Sila tunggu sebentar.</p>
+    </div>
+
+    <script>
+        // 1. Baca parameter 'id' dari URL (Contoh URL: card.html?id=IWY-0001)
+        const urlParams = new URLSearchParams(window.location.search);
+        const participantId = urlParams.get('id');
+
+        if (participantId) {
+            // 2. MASUKKAN URL WEB APP AWAK DI SINI
+            // Gantikan teks di bawah dengan URL yang bermula dengan https://script.google.com/...
+            const webAppUrl = 'https://script.google.com/macros/s/AKfycbzZOGBsQla6nvxU-ww4e3LTS6ck8Kjkg9KGx3Nm0kqL9vbRhCjmoOLPQkmXmWdFBbKG/exec'; 
+            
+            // Panggil Apps Script untuk ambil data
+            fetch(`${webAppUrl}?id=${participantId}`)
+                .then(response => response.json())
+                .then(data => {
+                    
+                    if(data.error) {
+                        document.getElementById('participantCard').innerHTML = `<p style="color:red;">❌ ${data.error}</p>`;
+                        return;
+                    }
+
+                    // 3. Susun data masuk ke dalam rekaan kad digital
+                    document.getElementById('participantCard').innerHTML = `
+                        <img src="${data.gambar || 'https://ui-avatars.com/api/?name=' + encodeURIComponent(data.nama) + '&background=random'}" class="profile-pic" alt="Gambar Profil">
+                        <h2>${data.nama}</h2>
+                        <p><strong>ID:</strong> ${participantId}</p>
+                        <p><span class="status">${data.status}</span></p>
+                        
+                        <div class="health-info">
+                            <strong>Nota Kesihatan:</strong><br>
+                            ${data.kesihatan}
