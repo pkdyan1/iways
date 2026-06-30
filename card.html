@@ -3,66 +3,119 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kad Digital Peserta IWAYS</title>
+    <title>Sistem Profil & Kad Digital IWAYS</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        /* Gaya asas untuk nampak macam kad */
-        body { 
-            background-color: #f4f4f9; 
-            display: flex; 
-            justify-content: center; 
-            padding-top: 50px; 
-            font-family: Arial, sans-serif; 
-        }
-        .card { 
-            background: white; 
-            border-radius: 15px; 
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1); 
-            padding: 20px; 
-            width: 320px; 
-            text-align: center; 
-        }
-        .profile-pic { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin-bottom: 15px; border: 3px solid #6a1b9a; }
-        .qr-code { width: 150px; height: 150px; margin-top: 15px; border: 1px solid #ddd; padding: 5px; border-radius: 8px;}
-        .status { font-weight: bold; color: white; background-color: #28a745; padding: 4px 10px; border-radius: 12px; font-size: 0.9em; }
-        h2 { margin: 5px 0; color: #333; font-size: 1.4em;}
-        p { margin: 5px 0; color: #555; }
-        .health-info { background-color: #fff3cd; padding: 10px; border-radius: 8px; font-size: 0.9em; margin-top: 15px; text-align: left;}
+        body { background-color: #f0f2f5; font-family: 'Segoe UI', Arial, sans-serif; display: flex; justify-content: center; padding: 20px; margin: 0; }
+        .container { background: white; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); padding: 25px; width: 100%; max-width: 450px; text-align: center; }
+        .profile-pic { width: 130px; height: 130px; border-radius: 50%; object-fit: cover; border: 4px solid #6a1b9a; margin-bottom: 10px; }
+        .status { font-weight: bold; color: white; background-color: #28a745; padding: 5px 15px; border-radius: 20px; display: inline-block; font-size: 0.85em; }
+        .grid-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 20px 0; }
+        .stat-box { background: #f8f9fa; padding: 12px; border-radius: 12px; border: 1px solid #e9ecef; text-align: center; }
+        .stat-box span { display: block; font-size: 0.8em; color: #6c757d; }
+        .stat-box strong { font-size: 1.2em; color: #333; }
+        .section-title { text-align: left; font-size: 1em; color: #6a1b9a; margin: 20px 0 10px 0; border-left: 4px solid #6a1b9a; padding-left: 8px; }
+        .info-block { background: #fff8e1; border-radius: 12px; padding: 12px; font-size: 0.9em; text-align: left; color: #555; margin-bottom: 15px; }
+        .chart-container { position: relative; margin: 25px 0; height: 220px; width: 100%; }
+        .qr-code { width: 140px; height: 140px; margin-top: 10px; border: 1px solid #ddd; padding: 5px; border-radius: 10px; }
+        .error-msg { color: #dc3545; font-weight: bold; padding: 20px; }
     </style>
 </head>
 <body>
 
-    <div class="card" id="participantCard">
-        <h3>Memuatkan data... ⏳</h3>
-        <p>Sila tunggu sebentar.</p>
+    <div class="container" id="mainContainer">
+        <h2>Memuatkan Data Sistem IWAYS... ⏳</h2>
+        <p>Sila tunggu sebentar sementara kami mengambil analisis terkini anda.</p>
     </div>
 
     <script>
-        // 1. Baca parameter 'id' dari URL (Contoh URL: card.html?id=IWY-0001)
         const urlParams = new URLSearchParams(window.location.search);
         const participantId = urlParams.get('id');
 
         if (participantId) {
-            // 2. MASUKKAN URL WEB APP AWAK DI SINI
-            // Gantikan teks di bawah dengan URL yang bermula dengan https://script.google.com/...
+            // PENTING: GANTIKAN URL DI BAWAH DENGAN URL WEB APP APPS SCRIPT ANDA SEBENAR
             const webAppUrl = 'https://script.google.com/macros/s/AKfycbzZOGBsQla6nvxU-ww4e3LTS6ck8Kjkg9KGx3Nm0kqL9vbRhCjmoOLPQkmXmWdFBbKG/exec'; 
-            
-            // Panggil Apps Script untuk ambil data
+
             fetch(`${webAppUrl}?id=${participantId}`)
-                .then(response => response.json())
+                .then(res => res.json())
                 .then(data => {
-                    
-                    if(data.error) {
-                        document.getElementById('participantCard').innerHTML = `<p style="color:red;">❌ ${data.error}</p>`;
+                    if (data.error) {
+                        document.getElementById('mainContainer').innerHTML = `<div class="error-msg">❌ ${data.error}</div>`;
                         return;
                     }
 
-                    // 3. Susun data masuk ke dalam rekaan kad digital
-                    document.getElementById('participantCard').innerHTML = `
-                        <img src="${data.gambar || 'https://ui-avatars.com/api/?name=' + encodeURIComponent(data.nama) + '&background=random'}" class="profile-pic" alt="Gambar Profil">
-                        <h2>${data.nama}</h2>
-                        <p><strong>ID:</strong> ${participantId}</p>
-                        <p><span class="status">${data.status}</span></p>
-                        
-                        <div class="health-info">
-                            <strong>Nota Kesihatan:</strong><br>
-                            ${data.kesihatan}
+                    const prof = data.profile;
+                    const cur = data.current;
+
+                    // Bina struktur dashboard sistem kad peserta
+                    document.getElementById('mainContainer').innerHTML = `
+                        <img src="${prof.gambar || 'https://ui-avatars.com/api/?size=120&name=' + encodeURIComponent(prof.nama)}" class="profile-pic" alt="Gambar">
+                        <h2 style="margin: 5px 0 10px 0;">${prof.nama}</h2>
+                        <p style="color:#777; margin:0;">ID Peserta: <strong>${participantId}</strong></p>
+                        <div style="margin: 10px 0;"><span class="status">${prof.status}</span></div>
+
+                        <div class="section-title">Analisis Fizikal Terkini (${cur.tarikh})</div>
+                        <div class="grid-stats">
+                            <div class="stat-box"><span>Berat Badan</span><strong>${cur.berat} kg</strong></div>
+                            <div class="stat-box"><span>Tinggi</span><strong>${prof.tinggi} cm</strong></div>
+                            <div class="stat-box"><span>Indeks BMI</span><strong>${cur.bmi}</strong></div>
+                            <div class="stat-box"><span>Ukur Lilit Pinggang</span><strong>${cur.pinggang || '-'} cm</strong></div>
+                        </div>
+
+                        <div class="section-title">Analisis Bentuk Badan</div>
+                        <div class="info-block" style="background:#e8f5e9; color:#2e7d32;">
+                            <strong>Keputusan:</strong> ${prof.bentukBadan}
+                        </div>
+
+                        <div class="section-title">Keadaan Kesihatan</div>
+                        <div class="info-block">
+                            ${prof.kesihatan}
+                        </div>
+
+                        <div class="section-title">Graf Trend Kemajuan & Perubahan</div>
+                        <div class="chart-container">
+                            <canvas id="progressChart"></canvas>
+                        </div>
+
+                        <hr style="border:0; border-top:1px solid #eee; margin:20px 0;">
+                        <p style="font-size:0.8em; color:#888; margin-bottom:5px;">Imbas QR untuk paparan data kemajuan live</p>
+                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(window.location.href)}" class="qr-code" alt="QR">
+                    `;
+
+                    // Sediakan Data untuk Graf Perubahan (Trend Rekod Perubahan)
+                    const labelTarikh = data.history.map(item => item.tarikh);
+                    const dataBerat = data.history.map(item => item.berat);
+                    const dataPinggang = data.history.map(item => item.pinggang);
+
+                    // Panggil Chart.js untuk lukis graf garisan kemajuan
+                    const ctx = document.getElementById('progressChart').getContext('2d');
+                    new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: labelTarikh,
+                            datasets: [
+                                { label: 'Berat (kg)', data: dataBerat, borderColor: '#6a1b9a', backgroundColor: 'rgba(106, 27, 154, 0.1)', tension: 0.3, yAxisID: 'y' },
+                                { label: 'Pinggang (cm)', data: dataPinggang, borderColor: '#ff9800', backgroundColor: 'rgba(255, 152, 0, 0.1)', tension: 0.3, yAxisID: 'y1' }
+                            ]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            scales: {
+                                y: { type: 'linear', display: true, position: 'left', title: { display: true, text: 'Berat (kg)' } },
+                                y1: { type: 'linear', display: true, position: 'right', grid: { drawOnChartArea: false }, title: { display: true, text: 'Pinggang (cm)' } }
+                            }
+                        }
+                    });
+
+                })
+                .catch(err => {
+                    document.getElementById('mainContainer').innerHTML = `<div class="error-msg">⚠️ Ralat memproses sistem. Sila semak setting Web App.</div>`;
+                    console.error(err);
+                });
+        } else {
+            document.getElementById('mainContainer').innerHTML = `<div class="error-msg">❌ Tiada ID Peserta dijumpai pada pautan.</div>`;
+        }
+    </script>
+</body>
+</html>
